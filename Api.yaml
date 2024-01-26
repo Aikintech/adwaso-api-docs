@@ -1,0 +1,146 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 59lm0rrtsuds9
+info:
+  title: Api
+  version: '1.0'
+  contact:
+    name: Aikintech
+    url: www.aikintech.com
+    email: admin@aikintech.com
+  description: Adwaso API documentaion
+servers:
+  - url: 'http://localhost:10010'
+    description: local
+paths:
+  /auth/login:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+      operationId: auth-login
+      description: Login user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+  /auth/register:
+    post:
+      summary: ''
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+      operationId: auth-register
+      description: Register user
+      tags:
+        - client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+        description: ''
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      x-examples: {}
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+    LoginRequest:
+      title: LoginRequest
+      x-stoplight:
+        id: hked38o5zlizc
+      type: object
+      properties:
+        email:
+          type: string
+          x-stoplight:
+            id: w36foii9i2c16
+        password:
+          type: string
+          x-stoplight:
+            id: w36foii9i2c16
+      required:
+        - email
+        - password
+    MessageResponse:
+      title: MessageResponse
+      x-stoplight:
+        id: iy1oryam38jhx
+      type: object
+      properties:
+        message:
+          type: string
+          x-stoplight:
+            id: 5hhl7tmezgi2y
+    ValidationResponse:
+      type: array
+      x-examples: {}
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+          errors:
+            type: array
+            items:
+              type: string
+        required:
+          - field
+          - errors
+  securitySchemes:
+    X-API-KEY:
+      name: API Key
+      type: apiKey
+      in: header
+    X-SHOP-DOMAIN:
+      name: Subdomain Key
+      type: apiKey
+      in: header
+      description: ''
+tags:
+  - name: backoffice
+  - name: client
