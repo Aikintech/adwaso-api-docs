@@ -19,6 +19,8 @@ paths:
       tags:
         - client
       responses:
+        '200':
+          description: OK
         '400':
           description: Bad Request
           content:
@@ -70,6 +72,44 @@ paths:
             schema:
               $ref: '#/components/schemas/RegisterRequest'
         description: ''
+  /auth/verify-phone-number:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: auth-verify-phone-number
+      description: Verify phone number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyPhoneNumberRequest'
+  /auth/verify-otp:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: auth-verify-otp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOtpRequest'
+      description: Verify OTP
 components:
   schemas:
     RegisterRequest:
@@ -131,6 +171,46 @@ components:
         required:
           - field
           - errors
+    VerifyPhoneNumberRequest:
+      title: VerifyPhoneNumberRequest
+      x-stoplight:
+        id: 2vgtbe5dqcbr3
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          x-stoplight:
+            id: v0qtwcy3lat3p
+        countryCode:
+          type: string
+          x-stoplight:
+            id: 9c7e86e6mrsdl
+      required:
+        - phoneNumber
+        - countryCode
+    VerifyOtpRequest:
+      title: VerifyOtpRequest
+      x-stoplight:
+        id: ft8l1uy5ejacg
+      type: object
+      properties:
+        code:
+          type: string
+          x-stoplight:
+            id: bj6uope0e0ibp
+        phoneNumber:
+          type: string
+          x-stoplight:
+            id: wq9oy7krkg9mo
+        countryCode:
+          type: string
+          x-stoplight:
+            id: 4rhxp5bpefkcg
+      required:
+        - code
+        - phoneNumber
+        - countryCode
+      description: ''
   securitySchemes:
     X-API-KEY:
       name: API Key
