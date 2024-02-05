@@ -124,15 +124,32 @@ components:
           type: string
         lastName:
           type: string
-        email:
-          type: string
         password:
           type: string
+        phoneNumber:
+          type: string
+          x-stoplight:
+            id: 1hmq03tf2a3n4
+        countrycode:
+          type: string
+          x-stoplight:
+            id: roxfrzfxqpvcl
+        location:
+          type: string
+          x-stoplight:
+            id: m1gvl1igauxxu
+        dateOfBirth:
+          type: string
+          x-stoplight:
+            id: khp36dwpes15a
       required:
         - firstName
         - lastName
-        - email
         - password
+        - phoneNumber
+        - countrycode
+        - location
+        - dateOfBirth
     LoginRequest:
       title: LoginRequest
       x-stoplight:
