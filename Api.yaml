@@ -161,20 +161,33 @@ components:
           x-stoplight:
             id: 5hhl7tmezgi2y
     ValidationResponse:
-      type: array
-      x-examples: {}
-      items:
-        type: object
-        properties:
-          field:
-            type: string
+      type: object
+      x-examples:
+        Example 1:
           errors:
-            type: array
-            items:
-              type: string
-        required:
-          - field
-          - errors
+            - field: phoneNumber
+              reasons:
+                - The phone number field is required.
+            - field: countryCode
+              reasons:
+                - The country code field is required.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              reasons:
+                type: array
+                items:
+                  type: string
+            required:
+              - field
+              - reasons
+      required:
+        - errors
     VerifyPhoneNumberRequest:
       title: VerifyPhoneNumberRequest
       x-stoplight:
