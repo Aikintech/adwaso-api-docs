@@ -36,6 +36,7 @@ paths:
       operationId: auth-login
       description: Login user
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -67,6 +68,7 @@ paths:
       tags:
         - client
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -87,6 +89,7 @@ paths:
       operationId: auth-verify-phone-number
       description: Verify phone number
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -105,6 +108,7 @@ paths:
                 $ref: '#/components/schemas/MessageResponse'
       operationId: auth-verify-otp
       requestBody:
+        required: true
         content:
           application/json:
             schema:
