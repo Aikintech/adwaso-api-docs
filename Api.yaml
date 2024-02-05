@@ -85,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageResponse'
+                $ref: '#/components/schemas/VerifyPhoneNumberResponse'
       operationId: auth-verify-phone-number
       description: Verify phone number
       requestBody:
@@ -234,6 +234,20 @@ components:
         - phoneNumber
         - countryCode
       description: ''
+    VerifyPhoneNumberResponse:
+      type: object
+      x-examples:
+        Example 1:
+          message: Phone number verified successfully.
+          userId: ''
+      properties:
+        message:
+          type: string
+        userId:
+          type: string
+      required:
+        - message
+        - userId
   securitySchemes:
     X-API-KEY:
       name: API Key
