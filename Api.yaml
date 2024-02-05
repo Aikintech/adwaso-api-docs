@@ -202,9 +202,15 @@ components:
           type: string
           x-stoplight:
             id: 9c7e86e6mrsdl
+        sendOtp:
+          type: boolean
+          x-stoplight:
+            id: c1itc5nu8pyhk
+          default: false
       required:
         - phoneNumber
         - countryCode
+        - sendOtp
     VerifyOtpRequest:
       title: VerifyOtpRequest
       x-stoplight:
