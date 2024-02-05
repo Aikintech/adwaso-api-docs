@@ -130,7 +130,7 @@ components:
           type: string
           x-stoplight:
             id: 1hmq03tf2a3n4
-        countrycode:
+        countryCode:
           type: string
           x-stoplight:
             id: roxfrzfxqpvcl
@@ -147,7 +147,7 @@ components:
         - lastName
         - password
         - phoneNumber
-        - countrycode
+        - countryCode
         - location
         - dateOfBirth
     LoginRequest:
