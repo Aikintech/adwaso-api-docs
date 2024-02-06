@@ -156,7 +156,7 @@ components:
         id: hked38o5zlizc
       type: object
       properties:
-        email:
+        phoneNumber:
           type: string
           x-stoplight:
             id: w36foii9i2c16
@@ -164,9 +164,14 @@ components:
           type: string
           x-stoplight:
             id: w36foii9i2c16
+        countryCode:
+          type: string
+          x-stoplight:
+            id: gmcr2glvi8qlp
       required:
-        - email
+        - phoneNumber
         - password
+        - countryCode
     MessageResponse:
       title: MessageResponse
       x-stoplight:
