@@ -1,6 +1,10 @@
 openapi: 3.0.0
 x-stoplight:
   id: 59lm0rrtsuds9
+tags:
+  - name: backoffice
+  - name: client
+  - name: tenant
 info:
   title: Api
   version: '1.0'
@@ -130,6 +134,36 @@ paths:
             schema:
               $ref: '#/components/schemas/VerifyOtpRequest'
       description: Verify OTP
+  /tenant/categories:
+    get:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantCategoriesResponse'
+      operationId: tenant-get-categories
+      tags:
+        - tenant
+      description: Tenant get categories
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: limit
+        - schema:
+            type: string
+          in: query
+          name: search
 components:
   schemas:
     RegisterRequest:
@@ -324,16 +358,64 @@ components:
       required:
         - tokens
         - user
+    TenantCategory:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        published:
+          type: boolean
+        featured:
+          type: boolean
+        createdAt:
+          type: string
+        products_count:
+          type: integer
+          x-stoplight:
+            id: r6wp30vwu0902
+      required:
+        - id
+        - name
+        - description
+        - published
+        - featured
+        - createdAt
+        - products_count
+    TenantCategoriesResponse:
+      type: object
+      x-examples: {}
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantCategory'
+        limit:
+          type: integer
+        page:
+          type: integer
+        total:
+          type: integer
+      required:
+        - items
+        - limit
+        - page
+        - total
   securitySchemes:
     X-API-KEY:
       name: API Key
       type: apiKey
       in: header
-    X-SHOP-DOMAIN:
-      name: Subdomain Key
+    X-TENANT-ID:
+      name: Tenant ID
       type: apiKey
       in: header
       description: ''
-tags:
-  - name: backoffice
-  - name: client
+    X-USER-TOKEN:
+      name: User token
+      type: apiKey
+      in: header
