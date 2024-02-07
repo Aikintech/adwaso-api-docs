@@ -21,6 +21,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
         '400':
           description: Bad Request
           content:
@@ -106,6 +110,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
       operationId: auth-verify-otp
       requestBody:
         required: true
@@ -270,6 +286,44 @@ components:
       required:
         - message
         - userId
+    LoginResponse:
+      type: object
+      x-examples:
+        Example 1:
+          tokens:
+            access: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY5Nzg0NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoiYWNjZXNzIn0.n5stiaBiMU5_KV1yT7ht71eRX4YWzRXOBQawOwOabAI
+            refresh: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNjM2NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoicmVmcmVzaCJ9.mxcS68PSOHOYSCnb9YVO320Zay_WF8t5nkkY-7dseUY
+          user:
+            avatar: 'https://ui-avatars.com/api/?name=John+Doe&background=random&color=fff'
+            firstName: John
+            lastName: Doe
+      properties:
+        tokens:
+          type: object
+          required:
+            - access
+            - refresh
+          properties:
+            access:
+              type: string
+            refresh:
+              type: string
+        user:
+          type: object
+          required:
+            - avatar
+            - firstName
+            - lastName
+          properties:
+            avatar:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+      required:
+        - tokens
+        - user
   securitySchemes:
     X-API-KEY:
       name: API Key
