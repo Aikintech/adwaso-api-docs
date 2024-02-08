@@ -17,7 +17,7 @@ servers:
   - url: 'http://localhost:10010'
     description: local
 paths:
-  /auth/login:
+  /client/auth/login:
     post:
       summary: ''
       tags:
@@ -49,7 +49,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LoginRequest'
-  /auth/register:
+    parameters: []
+  /client/auth/register:
     post:
       summary: ''
       responses:
@@ -82,7 +83,8 @@ paths:
             schema:
               $ref: '#/components/schemas/RegisterRequest'
         description: ''
-  /auth/verify-phone-number:
+    parameters: []
+  /client/auth/verify-phone-number:
     post:
       summary: ''
       tags:
@@ -102,7 +104,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/VerifyPhoneNumberRequest'
-  /auth/verify-otp:
+    parameters: []
+  /client/auth/verify-otp:
     post:
       summary: ''
       tags:
@@ -134,6 +137,7 @@ paths:
             schema:
               $ref: '#/components/schemas/VerifyOtpRequest'
       description: Verify OTP
+    parameters: []
   /tenant/categories:
     get:
       summary: ''
@@ -276,6 +280,19 @@ paths:
       security:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
+  /client/shops/get-by-subdomain:
+    get:
+      summary: ''
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientShop'
+      operationId: client-get-shop-by-subdomain
+      description: Client get shop by subdomain
 components:
   schemas:
     RegisterRequest:
@@ -534,6 +551,40 @@ components:
         - description
         - published
         - featured
+    ClientShop:
+      type: object
+      x-examples:
+        Example 1:
+          id: Ms4fcOy7Y80Skz
+          name: Yoo mart
+          subdomain: testsubdomain
+          description: ''
+          status: active
+          meta: null
+          logo: null
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        subdomain:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        meta:
+          nullable: true
+        logo:
+          nullable: true
+      required:
+        - id
+        - name
+        - subdomain
+        - description
+        - status
+        - meta
+        - logo
   securitySchemes:
     X-API-KEY:
       name: API Key
