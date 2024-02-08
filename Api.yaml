@@ -486,7 +486,7 @@ components:
           type: boolean
         createdAt:
           type: string
-        products_count:
+        productsCount:
           type: integer
           x-stoplight:
             id: r6wp30vwu0902
@@ -497,7 +497,7 @@ components:
         - published
         - featured
         - createdAt
-        - products_count
+        - productsCount
     TenantCategoriesResponse:
       type: object
       x-examples: {}
