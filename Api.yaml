@@ -283,7 +283,8 @@ paths:
   /client/shops/get-by-subdomain:
     get:
       summary: ''
-      tags: []
+      tags:
+        - client
       responses:
         '200':
           description: OK
@@ -293,6 +294,12 @@ paths:
                 $ref: '#/components/schemas/ClientShop'
       operationId: client-get-shop-by-subdomain
       description: Client get shop by subdomain
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: subdomain
+          required: true
 components:
   schemas:
     RegisterRequest:
