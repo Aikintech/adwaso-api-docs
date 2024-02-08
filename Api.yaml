@@ -280,6 +280,8 @@ paths:
       security:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
+      tags:
+        - tenant
   /client/shops/get-by-subdomain:
     get:
       summary: ''
