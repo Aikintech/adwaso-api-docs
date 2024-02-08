@@ -164,6 +164,118 @@ paths:
             type: string
           in: query
           name: search
+    post:
+      summary: ''
+      operationId: tenant-create-category
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantCategory'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+      description: Tenant create category
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      tags:
+        - tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantStoreCategoryRequest'
+  '/tenant/categories/{categoryId}':
+    get:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantCategory'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      operationId: tenant-get-category
+      tags:
+        - tenant
+      description: Tenant get categories
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      parameters: []
+    patch:
+      summary: ''
+      operationId: tenant-update-category
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantCategory'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+      description: Tenant update category
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      tags:
+        - tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantStoreCategoryRequest'
+    parameters:
+      - schema:
+          type: string
+        name: categoryId
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: tenant-delete-category
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      description: Tenant delete category
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
 components:
   schemas:
     RegisterRequest:
@@ -405,6 +517,23 @@ components:
         - limit
         - page
         - total
+    TenantStoreCategoryRequest:
+      type: object
+      x-examples: {}
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        published:
+          type: boolean
+        featured:
+          type: boolean
+      required:
+        - name
+        - description
+        - published
+        - featured
   securitySchemes:
     X-API-KEY:
       name: API Key
