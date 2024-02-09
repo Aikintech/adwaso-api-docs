@@ -475,6 +475,8 @@ paths:
       security:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
+      tags:
+        - tenant
 components:
   schemas:
     RegisterRequest:
