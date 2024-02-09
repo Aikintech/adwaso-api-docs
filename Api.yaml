@@ -349,6 +349,19 @@ paths:
       security:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: limit
+        - schema:
+            type: string
+          in: query
+          name: search
     post:
       summary: ''
       operationId: tenant-create-product
@@ -728,7 +741,7 @@ components:
             - percentage
             - fixed_price
         discountValue:
-          type: integer
+          type: number
           x-stoplight:
             id: 8t64mviuauhmg
         media:
