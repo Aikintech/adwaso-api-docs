@@ -413,6 +413,68 @@ paths:
             schema:
               $ref: '#/components/schemas/TenantStoreProductRequest'
         description: ''
+  '/tenant/products/{productId}':
+    get:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantProduct'
+      operationId: tenant-get-product
+      description: Tenant get product
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      parameters: []
+    patch:
+      summary: ''
+      operationId: tenant-update-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: Tenant update product
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      tags:
+        - tenant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantStoreProductRequest'
+        description: ''
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: tenant-delete-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      description: Tenanr delete product
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
 components:
   schemas:
     RegisterRequest:
