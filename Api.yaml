@@ -937,6 +937,10 @@ components:
           type: integer
         discountType:
           type: string
+          enum:
+            - none
+            - percentage
+            - fixed_price
         discountValue:
           type: integer
         tags:
