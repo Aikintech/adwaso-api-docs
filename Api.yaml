@@ -367,6 +367,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantProductsResponse'
       operationId: tenant-get-products
       description: Tenant get products
       security:
@@ -806,6 +810,97 @@ components:
         - price
         - discountType
         - discountValue
+        - media
+        - categories
+    TenantProductsResponse:
+      type: object
+      x-examples: {}
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantProduct'
+        limit:
+          type: integer
+        page:
+          type: integer
+        total:
+          type: integer
+      required:
+        - items
+        - limit
+        - page
+        - total
+    TenantProduct:
+      type: object
+      x-examples:
+        Example 1:
+          id: CLJvND9BZrLhqw
+          description: Test description for rosa shoe
+          published: false
+          featured: false
+          price: 10000
+          quantity: 1
+          discountType: none
+          discountValue: 0
+          tags: null
+          variants: null
+          createdAt: '2024-02-09T20:30:18.325Z'
+          media:
+            - fileId: 67JrPYNOsCKYPO
+              fileKey: product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg
+              fileURL: 'http://localhost:10010/storage/product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg'
+            - fileId: yzG2XlzazGVXDo
+              fileKey: product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg
+              fileURL: 'http://localhost:10010/storage/product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg'
+          categories: null
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        published:
+          type: boolean
+        featured:
+          type: boolean
+        price:
+          type: integer
+        quantity:
+          type: integer
+        discountType:
+          type: string
+        discountValue:
+          type: integer
+        tags:
+          type: array
+          nullable: true
+          items: {}
+        variants:
+          type: array
+          nullable: true
+          items: {}
+        createdAt:
+          type: string
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileUploadResponse'
+        categories:
+          type: array
+          nullable: true
+          items: {}
+      required:
+        - id
+        - description
+        - published
+        - featured
+        - price
+        - quantity
+        - discountType
+        - discountValue
+        - tags
+        - variants
+        - createdAt
         - media
         - categories
   securitySchemes:
