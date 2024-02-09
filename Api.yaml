@@ -725,18 +725,20 @@ components:
         - uploadType
     FileUploadResponse:
       type: object
-      x-examples:
-        Example 1:
-          fileKey: test/9XCbmc3EdKCu8S99YXGKeLE4k6oKs5PnJAKbKUSL.jpeg
-          fileURL: 'http://localhost:10010/storage/test/9XCbmc3EdKCu8S99YXGKeLE4k6oKs5PnJAKbKUSL.jpeg'
+      x-examples: {}
       properties:
         fileKey:
           type: string
         fileURL:
           type: string
+        fileId:
+          type: string
+          x-stoplight:
+            id: wbasyxcy9vpcw
       required:
         - fileKey
         - fileURL
+        - fileId
     TenantStoreProductRequest:
       title: TenantStoreProductRequest
       x-stoplight:
