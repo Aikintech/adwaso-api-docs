@@ -138,6 +138,26 @@ paths:
               $ref: '#/components/schemas/VerifyOtpRequest'
       description: Verify OTP
     parameters: []
+  /client/shops/get-by-subdomain:
+    get:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientShop'
+      operationId: client-get-shop-by-subdomain
+      description: Client get shop by subdomain
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: subdomain
+          required: true
   /tenant/categories:
     get:
       summary: ''
@@ -282,26 +302,40 @@ paths:
         - X-TENANT-ID: []
       tags:
         - tenant
-  /client/shops/get-by-subdomain:
-    get:
+  /tenant/files/upload:
+    post:
       summary: ''
       tags:
-        - client
+        - tenant
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientShop'
-      operationId: client-get-shop-by-subdomain
-      description: Client get shop by subdomain
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: subdomain
-          required: true
+                $ref: '#/components/schemas/FileUploadResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: tenant-upload-file
+      description: Tenant upload file
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadRequest'
 components:
   schemas:
     RegisterRequest:
@@ -594,6 +628,31 @@ components:
         - status
         - meta
         - logo
+    FileUploadRequest:
+      title: FileUploadRequest
+      x-stoplight:
+        id: 2i2zs08yputam
+      type: object
+      properties:
+        file:
+          type: string
+          x-stoplight:
+            id: cjndpbmo93gik
+          format: binary
+    FileUploadResponse:
+      type: object
+      x-examples:
+        Example 1:
+          fileKey: test/9XCbmc3EdKCu8S99YXGKeLE4k6oKs5PnJAKbKUSL.jpeg
+          fileURL: 'http://localhost:10010/storage/test/9XCbmc3EdKCu8S99YXGKeLE4k6oKs5PnJAKbKUSL.jpeg'
+      properties:
+        fileKey:
+          type: string
+        fileURL:
+          type: string
+      required:
+        - fileKey
+        - fileURL
   securitySchemes:
     X-API-KEY:
       name: API Key
