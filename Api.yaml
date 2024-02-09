@@ -336,6 +336,42 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadRequest'
+  /tenant/products:
+    get:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+      operationId: tenant-get-products
+      description: Tenant get products
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+    post:
+      summary: ''
+      operationId: tenant-create-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: Tenant create product
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      tags:
+        - tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantStoreProductRequest'
+        description: ''
 components:
   schemas:
     RegisterRequest:
@@ -653,6 +689,75 @@ components:
       required:
         - fileKey
         - fileURL
+    TenantStoreProductRequest:
+      title: TenantStoreProductRequest
+      x-stoplight:
+        id: dfc0ebnxnkzfx
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: 16l0bcazlkcrm
+        description:
+          type: string
+          x-stoplight:
+            id: myb2l7qcan3d0
+        published:
+          type: boolean
+          x-stoplight:
+            id: ws7e8io2t131r
+        featured:
+          type: boolean
+          x-stoplight:
+            id: fz1l49zcklbge
+        quantity:
+          type: integer
+          x-stoplight:
+            id: d6ra46d3tx4ks
+        price:
+          type: number
+          x-stoplight:
+            id: 7x07xvontsfk1
+        discountType:
+          type: string
+          x-stoplight:
+            id: 0q7yp3dozjyuf
+          enum:
+            - none
+            - percentage
+            - fixed_price
+        discountValue:
+          type: integer
+          x-stoplight:
+            id: 8t64mviuauhmg
+        media:
+          type: array
+          x-stoplight:
+            id: gmkdhaonckujr
+          items:
+            x-stoplight:
+              id: dmddxec9ljtes
+            type: string
+        categories:
+          type: array
+          x-stoplight:
+            id: vkv34e4k1xmvu
+          items:
+            x-stoplight:
+              id: 3r52epii4fvwf
+            type: string
+      required:
+        - name
+        - description
+        - published
+        - featured
+        - quantity
+        - price
+        - discountType
+        - discountValue
+        - media
+        - categories
   securitySchemes:
     X-API-KEY:
       name: API Key
