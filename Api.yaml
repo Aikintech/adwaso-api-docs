@@ -302,7 +302,7 @@ paths:
         - X-TENANT-ID: []
       tags:
         - tenant
-  /tenant/files/upload:
+  /tenant/files:
     post:
       summary: ''
       tags:
@@ -328,14 +328,37 @@ paths:
                 $ref: '#/components/schemas/MessageResponse'
       operationId: tenant-upload-file
       description: Tenant upload file
-      security:
-        - X-USER-TOKEN: []
-        - X-TENANT-ID: []
       requestBody:
         content:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadRequest'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+    parameters: []
+    delete:
+      summary: ''
+      operationId: tenant-delete-file
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      description: Tenant delete file
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          required: true
+          name: fileKey
+      tags:
+        - tenant
   /tenant/products:
     get:
       summary: ''
@@ -380,6 +403,7 @@ paths:
       tags:
         - tenant
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -688,6 +712,17 @@ components:
           x-stoplight:
             id: cjndpbmo93gik
           format: binary
+        uploadType:
+          type: string
+          x-stoplight:
+            id: yn3vxu4ti9r04
+          enum:
+            - avatar
+            - logo
+            - product
+      required:
+        - file
+        - uploadType
     FileUploadResponse:
       type: object
       x-examples:
