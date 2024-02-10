@@ -801,15 +801,7 @@ components:
         - featured
     ClientShop:
       type: object
-      x-examples:
-        Example 1:
-          id: Ms4fcOy7Y80Skz
-          name: Yoo mart
-          subdomain: testsubdomain
-          description: ''
-          status: active
-          meta: null
-          logo: null
+      x-examples: {}
       properties:
         id:
           type: string
@@ -824,7 +816,7 @@ components:
         meta:
           nullable: true
         logo:
-          type: string
+          $ref: '#/components/schemas/FileUploadResponse'
       required:
         - id
         - name
