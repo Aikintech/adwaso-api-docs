@@ -1,6 +1,6 @@
 openapi: 3.0.0
 x-stoplight:
-  id: 59lm0rrtsuds9
+  id: g3l4hj3kekuyw
 tags:
   - name: backoffice
   - name: client
@@ -137,6 +137,24 @@ paths:
             schema:
               $ref: '#/components/schemas/VerifyOtpRequest'
       description: Verify OTP
+    parameters: []
+  /tenant/auth/me:
+    get:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantAuthUser'
+      operationId: tenant-get-auth-user
+      description: Tenant get auth user
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
     parameters: []
   /client/shops/get-by-subdomain:
     get:
@@ -492,19 +510,19 @@ components:
         phoneNumber:
           type: string
           x-stoplight:
-            id: 1hmq03tf2a3n4
+            id: r5bqniytzxkhk
         countryCode:
           type: string
           x-stoplight:
-            id: roxfrzfxqpvcl
+            id: 26q1il2a6vban
         location:
           type: string
           x-stoplight:
-            id: m1gvl1igauxxu
+            id: juzcjtlvp7ju6
         dateOfBirth:
           type: string
           x-stoplight:
-            id: khp36dwpes15a
+            id: qjrg1jwcpdv8s
       required:
         - firstName
         - lastName
@@ -516,21 +534,21 @@ components:
     LoginRequest:
       title: LoginRequest
       x-stoplight:
-        id: hked38o5zlizc
+        id: i40gkp9t6rqw4
       type: object
       properties:
         phoneNumber:
           type: string
           x-stoplight:
-            id: w36foii9i2c16
+            id: 2k8vv77pn4zoa
         password:
           type: string
           x-stoplight:
-            id: w36foii9i2c16
+            id: qcjrhhbsfz42c
         countryCode:
           type: string
           x-stoplight:
-            id: gmcr2glvi8qlp
+            id: 383ytfek94ljy
       required:
         - phoneNumber
         - password
@@ -538,13 +556,13 @@ components:
     MessageResponse:
       title: MessageResponse
       x-stoplight:
-        id: iy1oryam38jhx
+        id: xc65yiw47su4z
       type: object
       properties:
         message:
           type: string
           x-stoplight:
-            id: 5hhl7tmezgi2y
+            id: fz8s79lg10to6
     ValidationResponse:
       type: object
       x-examples:
@@ -576,21 +594,21 @@ components:
     VerifyPhoneNumberRequest:
       title: VerifyPhoneNumberRequest
       x-stoplight:
-        id: 2vgtbe5dqcbr3
+        id: g8nvjssjo2w90
       type: object
       properties:
         phoneNumber:
           type: string
           x-stoplight:
-            id: v0qtwcy3lat3p
+            id: q00v1bqes42bg
         countryCode:
           type: string
           x-stoplight:
-            id: 9c7e86e6mrsdl
+            id: 6obc4o18fbdrk
         sendOtp:
           type: boolean
           x-stoplight:
-            id: c1itc5nu8pyhk
+            id: ver0297m65t7k
           default: false
       required:
         - phoneNumber
@@ -599,21 +617,21 @@ components:
     VerifyOtpRequest:
       title: VerifyOtpRequest
       x-stoplight:
-        id: ft8l1uy5ejacg
+        id: 2jm0mwq4vidxc
       type: object
       properties:
         code:
           type: string
           x-stoplight:
-            id: bj6uope0e0ibp
+            id: s1id03m43dw3q
         phoneNumber:
           type: string
           x-stoplight:
-            id: wq9oy7krkg9mo
+            id: 0q0o0e85pclnh
         countryCode:
           type: string
           x-stoplight:
-            id: 4rhxp5bpefkcg
+            id: qd8y6jb6utfah
       required:
         - code
         - phoneNumber
@@ -638,10 +656,13 @@ components:
       x-examples:
         Example 1:
           tokens:
-            access: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY5Nzg0NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoiYWNjZXNzIn0.n5stiaBiMU5_KV1yT7ht71eRX4YWzRXOBQawOwOabAI
-            refresh: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNjM2NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoicmVmcmVzaCJ9.mxcS68PSOHOYSCnb9YVO320Zay_WF8t5nkkY-7dseUY
+            access: >-
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY5Nzg0NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoiYWNjZXNzIn0.n5stiaBiMU5_KV1yT7ht71eRX4YWzRXOBQawOwOabAI
+            refresh: >-
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNjM2NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoicmVmcmVzaCJ9.mxcS68PSOHOYSCnb9YVO320Zay_WF8t5nkkY-7dseUY
           user:
-            avatar: 'https://ui-avatars.com/api/?name=John+Doe&background=random&color=fff'
+            avatar: >-
+              https://ui-avatars.com/api/?name=John+Doe&background=random&color=fff
             firstName: John
             lastName: Doe
       properties:
@@ -690,7 +711,7 @@ components:
         productsCount:
           type: integer
           x-stoplight:
-            id: r6wp30vwu0902
+            id: vpamq7xvep3hh
       required:
         - id
         - name
@@ -772,18 +793,18 @@ components:
     FileUploadRequest:
       title: FileUploadRequest
       x-stoplight:
-        id: 2i2zs08yputam
+        id: xn4s75z6tzyiz
       type: object
       properties:
         file:
           type: string
           x-stoplight:
-            id: cjndpbmo93gik
+            id: jh6egob7a3sia
           format: binary
         uploadType:
           type: string
           x-stoplight:
-            id: yn3vxu4ti9r04
+            id: g53jwszxov8fb
           enum:
             - avatar
             - logo
@@ -802,7 +823,7 @@ components:
         fileId:
           type: string
           x-stoplight:
-            id: wbasyxcy9vpcw
+            id: fsh2u6e5p2dyp
       required:
         - fileKey
         - fileURL
@@ -810,37 +831,37 @@ components:
     TenantStoreProductRequest:
       title: TenantStoreProductRequest
       x-stoplight:
-        id: dfc0ebnxnkzfx
+        id: vec0gea8s5bq1
       type: object
       properties:
         name:
           type: string
           x-stoplight:
-            id: 16l0bcazlkcrm
+            id: tr9g35pw4t79g
         description:
           type: string
           x-stoplight:
-            id: myb2l7qcan3d0
+            id: rheqtm3hoqget
         published:
           type: boolean
           x-stoplight:
-            id: ws7e8io2t131r
+            id: bi3uar8rti3bn
         featured:
           type: boolean
           x-stoplight:
-            id: fz1l49zcklbge
+            id: uusr73jegd3v6
         quantity:
           type: integer
           x-stoplight:
-            id: d6ra46d3tx4ks
+            id: cs2dg8csz6miv
         price:
           type: number
           x-stoplight:
-            id: 7x07xvontsfk1
+            id: kvlmxk4fdhyr7
         discountType:
           type: string
           x-stoplight:
-            id: 0q7yp3dozjyuf
+            id: 20hn4lnxfrcco
           enum:
             - none
             - percentage
@@ -848,22 +869,22 @@ components:
         discountValue:
           type: number
           x-stoplight:
-            id: 8t64mviuauhmg
+            id: 5w7mhnu2kz3nb
         media:
           type: array
           x-stoplight:
-            id: gmkdhaonckujr
+            id: hqdxqgtdt3082
           items:
             x-stoplight:
-              id: dmddxec9ljtes
+              id: 1my53f5o8lbtu
             type: string
         categories:
           type: array
           x-stoplight:
-            id: vkv34e4k1xmvu
+            id: vff6j2yqyo9t1
           items:
             x-stoplight:
-              id: 3r52epii4fvwf
+              id: i55r8byr9x6ld
             type: string
       required:
         - name
@@ -913,10 +934,12 @@ components:
           media:
             - fileId: 67JrPYNOsCKYPO
               fileKey: product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg
-              fileURL: 'http://localhost:10010/storage/product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg'
+              fileURL: >-
+                http://localhost:10010/storage/product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg
             - fileId: yzG2XlzazGVXDo
               fileKey: product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg
-              fileURL: 'http://localhost:10010/storage/product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg'
+              fileURL: >-
+                http://localhost:10010/storage/product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg
           categories: null
       properties:
         id:
@@ -924,7 +947,7 @@ components:
         name:
           type: string
           x-stoplight:
-            id: s3o6uacjzdqj7
+            id: d71bbkvp3jl5m
         description:
           type: string
         published:
@@ -976,6 +999,50 @@ components:
         - createdAt
         - media
         - categories
+    TenantAuthUser:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        location:
+          type: string
+        gender:
+          type: string
+        emailVerified:
+          type: boolean
+        dateOfBirth:
+          type: string
+        meta:
+          nullable: true
+        createdAt:
+          type: string
+        avatar:
+          type: string
+      required:
+        - id
+        - firstName
+        - lastName
+        - phoneNumber
+        - username
+        - email
+        - location
+        - gender
+        - emailVerified
+        - dateOfBirth
+        - meta
+        - createdAt
+        - avatar
   securitySchemes:
     X-API-KEY:
       name: API Key
