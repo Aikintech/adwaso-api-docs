@@ -138,6 +138,26 @@ paths:
               $ref: '#/components/schemas/VerifyOtpRequest'
       description: Verify OTP
     parameters: []
+  /client/shops/get-by-subdomain:
+    get:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientShop'
+      operationId: client-get-shop-by-subdomain
+      description: Client get shop by subdomain
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: subdomain
+          required: true
   /tenant/auth/me:
     get:
       summary: ''
@@ -180,26 +200,6 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdatePasswordRequest'
     parameters: []
-  /client/shops/get-by-subdomain:
-    get:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientShop'
-      operationId: client-get-shop-by-subdomain
-      description: Client get shop by subdomain
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: subdomain
-          required: true
   /tenant/categories:
     get:
       summary: ''
@@ -519,6 +519,28 @@ paths:
         - X-TENANT-ID: []
       tags:
         - tenant
+  /tenant/shops/update-logo:
+    patch:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: tenant-update-shop-logo
+      description: Tenant update shop logo
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMediaRequest'
 components:
   schemas:
     RegisterRequest:
@@ -1084,6 +1106,18 @@ components:
         - currentPassword
         - newPassword
         - confirmNewPassword
+    UpdateMediaRequest:
+      title: UpdateMediaRequest
+      x-stoplight:
+        id: v0m74d07mcxqy
+      type: object
+      properties:
+        fileId:
+          type: string
+          x-stoplight:
+            id: 8ytb90oistdca
+      required:
+        - fileId
   securitySchemes:
     X-API-KEY:
       name: API Key
