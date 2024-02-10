@@ -156,6 +156,30 @@ paths:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
     parameters: []
+  /tenant/auth/update-password:
+    post:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: tenant-auth-update-password
+      description: Tenant update password
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePasswordRequest'
+    parameters: []
   /client/shops/get-by-subdomain:
     get:
       summary: ''
@@ -656,13 +680,10 @@ components:
       x-examples:
         Example 1:
           tokens:
-            access: >-
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY5Nzg0NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoiYWNjZXNzIn0.n5stiaBiMU5_KV1yT7ht71eRX4YWzRXOBQawOwOabAI
-            refresh: >-
-              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNjM2NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoicmVmcmVzaCJ9.mxcS68PSOHOYSCnb9YVO320Zay_WF8t5nkkY-7dseUY
+            access: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY5Nzg0NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoiYWNjZXNzIn0.n5stiaBiMU5_KV1yT7ht71eRX4YWzRXOBQawOwOabAI
+            refresh: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNjM2NDgsImlhdCI6MTcwNjk3NzI0OCwiaXNzIjoiQWR3YXNvIiwic3ViIjoibTk0bjh1VkN4WDFlIiwidG9rZW5UeXBlIjoicmVmcmVzaCJ9.mxcS68PSOHOYSCnb9YVO320Zay_WF8t5nkkY-7dseUY
           user:
-            avatar: >-
-              https://ui-avatars.com/api/?name=John+Doe&background=random&color=fff
+            avatar: 'https://ui-avatars.com/api/?name=John+Doe&background=random&color=fff'
             firstName: John
             lastName: Doe
       properties:
@@ -934,12 +955,10 @@ components:
           media:
             - fileId: 67JrPYNOsCKYPO
               fileKey: product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg
-              fileURL: >-
-                http://localhost:10010/storage/product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg
+              fileURL: 'http://localhost:10010/storage/product/QBJJEpzYWXtjy23U8pYG9hPWUdcB2QeFMtssNcPK.jpeg'
             - fileId: yzG2XlzazGVXDo
               fileKey: product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg
-              fileURL: >-
-                http://localhost:10010/storage/product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg
+              fileURL: 'http://localhost:10010/storage/product/Yt9cdXqowEMRkTEdtVWxf6XxGpjPX3vQixHiXDZh.jpeg'
           categories: null
       properties:
         id:
@@ -1043,6 +1062,28 @@ components:
         - meta
         - createdAt
         - avatar
+    UpdatePasswordRequest:
+      title: UpdatePasswordRequest
+      x-stoplight:
+        id: 0kju2hyx4edqh
+      type: object
+      properties:
+        currentPassword:
+          type: string
+          x-stoplight:
+            id: msf81aka6etu4
+        newPassword:
+          type: string
+          x-stoplight:
+            id: gg5fxsol1u41o
+        confirmNewPassword:
+          type: string
+          x-stoplight:
+            id: goyejbpb7v753
+      required:
+        - currentPassword
+        - newPassword
+        - confirmNewPassword
   securitySchemes:
     X-API-KEY:
       name: API Key
