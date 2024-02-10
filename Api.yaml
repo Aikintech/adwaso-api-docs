@@ -802,7 +802,7 @@ components:
         meta:
           nullable: true
         logo:
-          nullable: true
+          type: string
       required:
         - id
         - name
