@@ -541,6 +541,29 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateMediaRequest'
+  /tenant/shops/update-details:
+    patch:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: tenant-update-shop-details
+      description: Tenant update shop details
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-ID: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMediaRequest'
+    parameters: []
 components:
   schemas:
     RegisterRequest:
@@ -811,10 +834,37 @@ components:
           type: string
         description:
           type: string
-        status:
-          type: string
         meta:
-          nullable: true
+          type: object
+          required:
+            - location
+            - paymentMethod
+            - paymentNumber
+            - instagram
+            - facebook
+            - twitter
+            - whatsApp
+            - tikTok
+            - phoneNumber
+          properties:
+            location:
+              type: string
+            paymentMethod:
+              type: string
+            paymentNumber:
+              type: string
+            instagram:
+              type: string
+            facebook:
+              type: string
+            twitter:
+              type: string
+            whatsApp:
+              type: string
+            tikTok:
+              type: string
+            phoneNumber:
+              type: string
         logo:
           $ref: '#/components/schemas/FileUploadResponse'
       required:
@@ -822,7 +872,6 @@ components:
         - name
         - subdomain
         - description
-        - status
         - meta
         - logo
     FileUploadRequest:
@@ -1015,8 +1064,8 @@ components:
             $ref: '#/components/schemas/FileUploadResponse'
         categories:
           type: array
-          nullable: true
-          items: {}
+          items:
+            $ref: '#/components/schemas/TenantCategory'
       required:
         - id
         - name
@@ -1110,6 +1159,36 @@ components:
             id: 8ytb90oistdca
       required:
         - fileId
+    UpdateShopRequest:
+      type: object
+      x-examples: {}
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+        description:
+          type: string
+        phoneNumber:
+          type: string
+        countryCode:
+          type: string
+        instagram:
+          type: string
+        facebook:
+          type: string
+        twitter:
+          type: string
+        WhatsApp:
+          type: string
+        tikTok:
+          type: string
+      required:
+        - name
+        - location
+        - description
+        - phoneNumber
+        - countryCode
   securitySchemes:
     X-API-KEY:
       name: API Key
