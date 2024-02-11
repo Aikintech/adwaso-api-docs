@@ -562,7 +562,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateMediaRequest'
+              $ref: '#/components/schemas/UpdateShopRequest'
     parameters: []
 components:
   schemas:
