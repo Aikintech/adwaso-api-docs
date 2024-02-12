@@ -705,6 +705,13 @@ components:
           x-stoplight:
             id: ver0297m65t7k
           default: false
+        action:
+          type: string
+          x-stoplight:
+            id: rf1lvv91mtzt9
+          enum:
+            - register
+            - forgot_password
       required:
         - phoneNumber
         - countryCode
