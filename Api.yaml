@@ -716,6 +716,7 @@ components:
         - phoneNumber
         - countryCode
         - sendOtp
+        - action
     VerifyOtpRequest:
       title: VerifyOtpRequest
       x-stoplight:
