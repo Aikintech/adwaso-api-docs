@@ -116,7 +116,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageResponse'
+                $ref: '#/components/schemas/VerifyOtpResponse'
         '400':
           description: Bad Request
           content:
@@ -574,8 +574,6 @@ components:
           type: string
         lastName:
           type: string
-        password:
-          type: string
         phoneNumber:
           type: string
           x-stoplight:
@@ -584,6 +582,8 @@ components:
           type: string
           x-stoplight:
             id: 26q1il2a6vban
+        password:
+          type: string
         location:
           type: string
           x-stoplight:
@@ -592,14 +592,40 @@ components:
           type: string
           x-stoplight:
             id: qjrg1jwcpdv8s
+        storeName:
+          type: string
+          x-stoplight:
+            id: 9si2kfa86mmwd
+        storeSubdomain:
+          type: string
+          x-stoplight:
+            id: ny7w1nqulisx1
+        storeLogoKey:
+          type: string
+          x-stoplight:
+            id: gn5lz6jego1r9
+        storeLocation:
+          type: string
+          x-stoplight:
+            id: xqhl929ynk493
+        StorePaymentMethod:
+          type: string
+          x-stoplight:
+            id: lv5p7w9j7h7yz
+        StorePaymentNumber:
+          type: string
+          x-stoplight:
+            id: w54chfbemqa8y
       required:
         - firstName
         - lastName
-        - password
         - phoneNumber
         - countryCode
+        - password
         - location
         - dateOfBirth
+        - storeName
+        - storeSubdomain
     LoginRequest:
       title: LoginRequest
       x-stoplight:
@@ -701,11 +727,20 @@ components:
           type: string
           x-stoplight:
             id: qd8y6jb6utfah
+        action:
+          type: string
+          x-stoplight:
+            id: nfzlnrq8zvbpv
+          enum:
+            - register
+            - forgot_password
+            - payment_details_change
+            - payment_details_addition
       required:
         - code
         - phoneNumber
         - countryCode
-      description: ''
+        - action
     VerifyPhoneNumberResponse:
       type: object
       x-examples:
@@ -1189,6 +1224,23 @@ components:
         - description
         - phoneNumber
         - countryCode
+    VerifyOtpResponse:
+      title: VerifyOtpResponse
+      x-stoplight:
+        id: fv7bk4yl0xo11
+      type: object
+      properties:
+        message:
+          type: string
+          x-stoplight:
+            id: 6i08nbwb9r0bx
+        code:
+          type: string
+          x-stoplight:
+            id: oj84q6cwo9109
+      required:
+        - message
+        - code
   securitySchemes:
     X-API-KEY:
       name: API Key
