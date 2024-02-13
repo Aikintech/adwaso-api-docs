@@ -158,6 +158,39 @@ paths:
           in: query
           name: subdomain
           required: true
+  /client/files:
+    post:
+      summary: ''
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+      operationId: client-upload-file
+      description: Client upload file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadRequest'
+        description: ''
+      tags:
+        - client
+    parameters: []
   /tenant/auth/me:
     get:
       summary: ''
