@@ -12,10 +12,14 @@ info:
     name: Aikintech
     url: www.aikintech.com
     email: admin@aikintech.com
-  description: Adwaso API documentaion
+  description: Adwaso API documentation
 servers:
   - url: 'http://localhost:10010'
     description: local
+  - url: 'https://api.adwaso.store'
+    description: production
+  - url: 'https://stagingapi.adwaso.store'
+    description: statging
 paths:
   /client/auth/login:
     post:
@@ -138,7 +142,7 @@ paths:
               $ref: '#/components/schemas/VerifyOtpRequest'
       description: Verify OTP
     parameters: []
-  /client/shops/get-by-subdomain:
+  /client/stores/get-by-subdomain:
     get:
       summary: ''
       tags:
@@ -149,9 +153,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientShop'
-      operationId: client-get-shop-by-subdomain
-      description: Client get shop by subdomain
+                $ref: '#/components/schemas/ClientStore'
+      operationId: client-get-store-by-subdomain
+      description: Client get store by subdomain
       parameters:
         - schema:
             type: string
@@ -552,7 +556,7 @@ paths:
         - X-TENANT-ID: []
       tags:
         - tenant
-  /tenant/shops/update-logo:
+  /tenant/stores/update-logo:
     patch:
       summary: ''
       tags:
@@ -564,8 +568,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
-      operationId: tenant-update-shop-logo
-      description: Tenant update shop logo
+      operationId: tenant-update-store-logo
+      description: Tenant update store logo
       security:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
@@ -574,7 +578,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateMediaRequest'
-  /tenant/shops/update-details:
+  /tenant/stores/update-details:
     patch:
       summary: ''
       tags:
@@ -586,8 +590,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
-      operationId: tenant-update-shop-details
-      description: Tenant update shop details
+      operationId: tenant-update-store-details
+      description: Tenant update store details
       security:
         - X-USER-TOKEN: []
         - X-TENANT-ID: []
@@ -595,7 +599,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateShopRequest'
+              $ref: '#/components/schemas/UpdateStoreRequest'
     parameters: []
 components:
   schemas:
@@ -911,8 +915,10 @@ components:
         - description
         - published
         - featured
-    ClientShop:
+    ClientStore:
       type: object
+      x-stoplight:
+        id: 344133eb2047e
       x-examples: {}
       properties:
         id:
@@ -1248,8 +1254,10 @@ components:
             id: 8ytb90oistdca
       required:
         - fileId
-    UpdateShopRequest:
+    UpdateStoreRequest:
       type: object
+      x-stoplight:
+        id: 2399edf7a7e27
       x-examples: {}
       properties:
         name:
