@@ -592,6 +592,17 @@ components:
           type: string
           x-stoplight:
             id: qjrg1jwcpdv8s
+        gender:
+          type: string
+          x-stoplight:
+            id: qjrg1jwcpdv8s
+          enum:
+            - male
+            - female
+        code:
+          type: string
+          x-stoplight:
+            id: qjrg1jwcpdv8s
         storeName:
           type: string
           x-stoplight:
@@ -624,6 +635,8 @@ components:
         - password
         - location
         - dateOfBirth
+        - gender
+        - code
         - storeName
         - storeSubdomain
     LoginRequest:
