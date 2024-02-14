@@ -941,6 +941,7 @@ components:
             - whatsApp
             - tikTok
             - phoneNumber
+            - currency
           properties:
             location:
               type: string
@@ -960,6 +961,10 @@ components:
               type: string
             phoneNumber:
               type: string
+            currency:
+              type: string
+              x-stoplight:
+                id: g47eozh3t66ox
         logo:
           $ref: '#/components/schemas/FileUploadResponse'
       required:
