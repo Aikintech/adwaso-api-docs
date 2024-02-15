@@ -929,6 +929,14 @@ components:
           type: string
         description:
           type: string
+        searchKey:
+          type: string
+          x-stoplight:
+            id: fhtwdbl3ion4c
+        searchToken:
+          type: string
+          x-stoplight:
+            id: fhtwdbl3ion4c
         meta:
           type: object
           required:
@@ -972,6 +980,8 @@ components:
         - name
         - subdomain
         - description
+        - searchKey
+        - searchToken
         - meta
         - logo
     FileUploadRequest:
