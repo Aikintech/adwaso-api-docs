@@ -6,7 +6,7 @@ tags:
   - name: client
   - name: tenant
 info:
-  title: Api
+  title: Adwaso API
   version: '1.0'
   contact:
     name: Aikintech
