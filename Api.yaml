@@ -861,6 +861,10 @@ components:
           type: string
         description:
           type: string
+        slug:
+          type: string
+          x-stoplight:
+            id: q2lxz20rqznwl
         published:
           type: boolean
         featured:
@@ -875,6 +879,7 @@ components:
         - id
         - name
         - description
+        - slug
         - published
         - featured
         - createdAt
