@@ -254,6 +254,24 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadReq'
+  /client/domains:
+    get:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  x-stoplight:
+                    id: a6yud5t3mk8d5
+                  type: string
+      operationId: client-get-domains
+      description: 'Client: Get domains'
 components:
   schemas:
     VerifyCodeReq:
