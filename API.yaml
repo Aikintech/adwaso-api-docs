@@ -1,0 +1,500 @@
+openapi: 3.0.0
+x-stoplight:
+  id: g1ch3n10mzvse
+info:
+  title: Adwaso OpenAPI
+  version: '1.0'
+  contact:
+    name: Nana Kwesi Ofosu-Aikins
+    email: nanaaikinson24@gmail.com
+  description: API description
+servers:
+  - url: 'http://localhost:9001'
+  - url: 'https://staging-api.adwaso.store'
+    description: ''
+  - url: 'https://api.adwaso.store'
+    description: ''
+paths:
+  /auth/verify-phone-number:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: auth-verify-phone-number
+      description: 'Auth: Verify phone number'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendCodeReq'
+        description: ''
+  /auth/resend-code:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: auth-resend-code
+      description: 'Auth: Resend code'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendCodeReq'
+        description: ''
+  /auth/verify-code:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyCodeRes'
+      operationId: auth-verify-code
+      description: 'Auth: Verify code'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyCodeReq'
+        description: ''
+    parameters: []
+  /auth/register:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: auth-register
+      description: 'Auth: Register'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterReq'
+        description: ''
+    parameters: []
+  /auth/login:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginRes'
+      operationId: auth-login
+      description: 'Auth: Login'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginReq'
+        description: ''
+      security:
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+    parameters: []
+  /admin/categories:
+    get:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesRes'
+      operationId: admin-get-categories
+      description: 'Admin: Get categories'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+    post:
+      summary: ''
+      operationId: admin-create-category
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      description: 'Admin: Create category'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCategoryReq'
+  '/admin/categories/{categoryId}':
+    get:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      operationId: admin-get-category
+      description: 'Admin: Get category'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+    patch:
+      summary: ''
+      operationId: admin-update-category
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      description: 'Admin: Update category'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+      tags:
+        - admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCategoryReq'
+    parameters:
+      - schema:
+          type: string
+        name: categoryId
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: admin-delete-category
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      description: 'Admin: Delete category'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+      tags:
+        - admin
+  /admin/files:
+    post:
+      tags:
+        - admin
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadRes'
+      operationId: admin-upload-file
+      description: 'Admin: Upload file'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+        - X-TENANT-SUBDOMAIN: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadReq'
+components:
+  schemas:
+    VerifyCodeReq:
+      type: object
+      x-stoplight:
+        id: 0da721ac1aa5a
+      x-examples: {}
+      properties:
+        phoneNumber:
+          type: string
+        countryCode:
+          type: string
+        action:
+          type: string
+          enum:
+            - LOGIN_VERIFICATION
+            - REGISTER_VERIFICATION
+            - EMAIL_VERIFICATION
+            - PURCHASE_VERIFICATION
+            - RESET_PASSWORD
+        code:
+          type: string
+      required:
+        - phoneNumber
+        - countryCode
+        - action
+        - code
+    SendCodeReq:
+      type: object
+      x-stoplight:
+        id: 3if5adlodinmd
+      x-examples: {}
+      properties:
+        phoneNumber:
+          type: string
+        countryCode:
+          type: string
+        action:
+          type: string
+          enum:
+            - LOGIN_VERIFICATION
+            - REGISTER_VERIFICATION
+            - EMAIL_VERIFICATION
+            - PURCHASE_VERIFICATION
+            - RESET_PASSWORD
+      required:
+        - phoneNumber
+        - countryCode
+        - action
+        - code
+    MessageRes:
+      type: object
+      x-stoplight:
+        id: 9xujj5wwv9wft
+      x-examples: {}
+      properties:
+        message:
+          type: string
+      required:
+        - message
+    VerifyCodeRes:
+      type: object
+      x-stoplight:
+        id: 0d8721ac1ad3c
+      x-examples: {}
+      properties:
+        verificationCode:
+          type: string
+      required:
+        - verificationCode
+    RegisterReq:
+      type: object
+      x-examples: {}
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        phoneNumber:
+          type: string
+        countryCode:
+          type: string
+        shopName:
+          type: string
+        shopSubdomain:
+          type: string
+        verificationCode:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - password
+        - phoneNumber
+        - countryCode
+        - shopName
+        - shopSubdomain
+        - verificationCode
+      x-stoplight:
+        id: 3ubxtto2ppr22
+    LoginReq:
+      type: object
+      x-stoplight:
+        id: 0s434xixi0ws1
+      x-examples: {}
+      properties:
+        password:
+          type: string
+        phoneNumber:
+          type: string
+        countryCode:
+          type: string
+        verificationCode:
+          type: string
+      required:
+        - password
+        - phoneNumber
+        - countryCode
+        - verificationCode
+    LoginRes:
+      type: object
+      x-examples: {}
+      properties:
+        tokens:
+          type: object
+          required:
+            - access
+            - refresh
+          properties:
+            access:
+              type: string
+            refresh:
+              type: string
+        user:
+          type: object
+          required:
+            - avatar
+            - firstName
+            - lastName
+          properties:
+            avatar:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+      required:
+        - tokens
+        - user
+      x-stoplight:
+        id: focpq326f8nds
+    Category:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - createdAt
+      x-stoplight:
+        id: ttr3yeuj5bhre
+    CategoriesRes:
+      title: CategoriesRes
+      x-stoplight:
+        id: yxm761wnflr17
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+    StoreCategoryReq:
+      type: object
+      x-examples: {}
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - description
+      x-stoplight:
+        id: sw0v5ixw3s64t
+    FileUploadReq:
+      title: FileUploadReq
+      x-stoplight:
+        id: yvp4nj7luq7rg
+      type: object
+      properties:
+        file:
+          type: string
+          x-stoplight:
+            id: fs39rf03fsygc
+          format: binary
+        uploadType:
+          type: string
+          x-stoplight:
+            id: 8jzzwr3okdk01
+          enum:
+            - product
+            - avatar
+            - logo
+            - banner
+      required:
+        - file
+        - uploadType
+    FileUploadRes:
+      type: object
+      x-examples: {}
+      properties:
+        key:
+          type: string
+        url:
+          type: string
+      required:
+        - key
+        - url
+      x-stoplight:
+        id: ka6ne781yalb6
+  securitySchemes:
+    X-USER-TOKEN:
+      type: apiKey
+      in: header
+      name: user token
+    X-TENANT-KEY:
+      name: tenant key
+      type: apiKey
+      in: header
+    X-TENANT-SUBDOMAIN:
+      name: tenant subdomain
+      type: apiKey
+      in: header
+tags:
+  - name: backoffice
+  - name: client
+  - name: admin
