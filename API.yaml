@@ -90,7 +90,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageRes'
+                type: object
+                properties:
+                  domain:
+                    type: string
+                    x-stoplight:
+                      id: ghxts43psodye
+                required:
+                  - domain
       operationId: auth-register
       description: 'Auth: Register'
       requestBody:
