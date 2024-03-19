@@ -254,7 +254,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadReq'
-  /client/domains:
+  /client/subdomains:
     get:
       summary: ''
       tags:
@@ -268,10 +268,10 @@ paths:
                 type: array
                 items:
                   x-stoplight:
-                    id: a6yud5t3mk8d5
+                    id: fid3sup74mmyr
                   type: string
-      operationId: client-get-domains
-      description: 'Client: Get domains'
+      operationId: client-get-subdomains
+      description: 'Client: Get subdomains'
 components:
   schemas:
     VerifyCodeReq:
