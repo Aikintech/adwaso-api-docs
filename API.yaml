@@ -270,7 +270,7 @@ paths:
                   x-stoplight:
                     id: fid3sup74mmyr
                   type: string
-      operationId: client-get-subdomains
+      operationId: get-subdomains
       description: 'Client: Get subdomains'
 components:
   schemas:
