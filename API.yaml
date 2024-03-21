@@ -254,6 +254,30 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadReq'
+  /admin/products:
+    post:
+      tags:
+        - admin
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: admin-create-product
+      description: 'Admin: Create product'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StoreProdcutReq'
+    parameters: []
   /client/subdomains:
     get:
       summary: ''
@@ -509,6 +533,49 @@ components:
         - url
       x-stoplight:
         id: ka6ne781yalb6
+    StoreProdcutReq:
+      type: object
+      x-stoplight:
+        id: 40wwq42tspmtk
+      x-examples: {}
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        stockType:
+          type: string
+          enum:
+            - LIMITED
+            - IN_STOCK
+            - OUT_OF_STOCK
+        stockQuantity:
+          type: integer
+        price:
+          type: integer
+          x-stoplight:
+            id: adyhkvk1vkjst
+        salePrice:
+          type: integer
+          x-stoplight:
+            id: adyhkvk1vkjst
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileUploadRes'
+        categories:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - description
+        - stockType
+        - stockQuantity
+        - price
+        - salePrice
+        - media
+        - categories
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
