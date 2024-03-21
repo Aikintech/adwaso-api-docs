@@ -266,10 +266,20 @@ paths:
             application/json:
               schema:
                 type: array
+                x-examples:
+                  Example 1:
+                    - domain: ''
+                      key: ''
                 items:
-                  x-stoplight:
-                    id: fid3sup74mmyr
-                  type: string
+                  type: object
+                  properties:
+                    domain:
+                      type: string
+                    key:
+                      type: string
+                  required:
+                    - domain
+                    - key
       operationId: get-subdomains
       description: 'Client: Get subdomains'
 components:
