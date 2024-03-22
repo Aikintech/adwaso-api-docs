@@ -289,31 +289,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                x-examples:
-                  Example 1:
-                    - domain: ''
-                      key: ''
-                items:
-                  type: object
-                  properties:
-                    domain:
-                      type: string
-                    key:
-                      type: string
-                    name:
-                      type: string
-                      x-stoplight:
-                        id: ipwbjeewaztww
-                    logo:
-                      type: string
-                      x-stoplight:
-                        id: uudri16ka1s5x
-                  required:
-                    - domain
-                    - key
-                    - name
-                    - logo
+                $ref: '#/components/schemas/ClientShopsRes'
       operationId: get-shops
       description: 'Client: Get shops'
 components:
@@ -586,6 +562,42 @@ components:
         - salePrice
         - media
         - categories
+    ClientShopsRes:
+      title: ClientShopsRes
+      x-stoplight:
+        id: 98q4m3j7pxi34
+      type: array
+      items:
+        x-stoplight:
+          id: 9l78rvh2vr93u
+        type: object
+        properties:
+          domain:
+            type: string
+            x-stoplight:
+              id: b4glaeyef2kir
+          key:
+            type: string
+            x-stoplight:
+              id: ooybpvkuddwv0
+          name:
+            type: string
+            x-stoplight:
+              id: lor30mdmflcfi
+          status:
+            type: string
+            x-stoplight:
+              id: id62vk1n4y02r
+          logo:
+            type: string
+            x-stoplight:
+              id: 4z2tezmsp8gi3
+        required:
+          - domain
+          - key
+          - name
+          - status
+          - logo
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
