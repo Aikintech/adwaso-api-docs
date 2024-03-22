@@ -278,7 +278,7 @@ paths:
             schema:
               $ref: '#/components/schemas/StoreProdcutReq'
     parameters: []
-  /client/subdomains:
+  /client/shops:
     get:
       summary: ''
       tags:
@@ -301,11 +301,21 @@ paths:
                       type: string
                     key:
                       type: string
+                    name:
+                      type: string
+                      x-stoplight:
+                        id: ipwbjeewaztww
+                    logo:
+                      type: string
+                      x-stoplight:
+                        id: uudri16ka1s5x
                   required:
                     - domain
                     - key
-      operationId: get-subdomains
-      description: 'Client: Get subdomains'
+                    - name
+                    - logo
+      operationId: get-shops
+      description: 'Client: Get shops'
 components:
   schemas:
     VerifyCodeReq:
