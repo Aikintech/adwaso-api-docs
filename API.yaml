@@ -277,6 +277,35 @@ paths:
             schema:
               $ref: '#/components/schemas/StoreProductReq'
     parameters: []
+    get:
+      summary: ''
+      operationId: admin-get-products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsRes'
+      description: 'Admin: Get products'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: limit
+        - schema:
+            type: string
+          in: query
+          name: search
+      tags:
+        - admin
   /client/shops:
     get:
       summary: ''
@@ -597,6 +626,64 @@ components:
           - name
           - status
           - logo
+    ProductAdmin:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        salePrice:
+          type: integer
+        stockType:
+          type: string
+        stockQuantity:
+          type: integer
+        createdAt:
+          type: string
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileUploadRes'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+      required:
+        - id
+        - name
+        - description
+        - price
+        - salePrice
+        - stockType
+        - stockQuantity
+        - createdAt
+        - media
+        - categories
+    ProductsRes:
+      type: object
+      x-examples: {}
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAdmin'
+        limit:
+          type: integer
+        page:
+          type: integer
+        total:
+          type: integer
+      required:
+        - items
+        - limit
+        - page
+        - total
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
