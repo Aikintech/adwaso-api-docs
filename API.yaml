@@ -264,8 +264,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: '#/components/schemas/MessageRes'
       operationId: admin-create-product
       description: 'Admin: Create product'
       security:
@@ -274,9 +273,9 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              $ref: '#/components/schemas/StoreProdcutReq'
+              $ref: '#/components/schemas/StoreProductReq'
     parameters: []
   /client/shops:
     get:
@@ -519,7 +518,7 @@ components:
         - url
       x-stoplight:
         id: ka6ne781yalb6
-    StoreProdcutReq:
+    StoreProductReq:
       type: object
       x-stoplight:
         id: 40wwq42tspmtk
