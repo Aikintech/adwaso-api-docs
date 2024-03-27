@@ -304,6 +304,17 @@ paths:
             type: string
           in: query
           name: search
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          name: orderBy
+        - schema:
+            type: string
+          in: query
+          name: filterByCategory
       tags:
         - admin
   /client/shops:
@@ -563,6 +574,7 @@ components:
             - LIMITED
             - IN_STOCK
             - OUT_OF_STOCK
+            - NOT_APPLICABLE
         stockQuantity:
           type: integer
         price:
@@ -642,6 +654,11 @@ components:
           type: integer
         stockType:
           type: string
+          enum:
+            - LIMITED
+            - IN_STOCK
+            - OUT_OF_STOCK
+            - NOT_APPLICABLE
         stockQuantity:
           type: integer
         createdAt:
