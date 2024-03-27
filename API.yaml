@@ -310,7 +310,7 @@ paths:
               - asc
               - desc
           in: query
-          name: orderBy
+          name: sort
         - schema:
             type: string
           in: query
