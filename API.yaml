@@ -317,6 +317,51 @@ paths:
           name: filterByCategory
       tags:
         - admin
+  '/admin/products/{productId}':
+    patch:
+      tags:
+        - admin
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: admin-update-product
+      description: 'Admin: Update product'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreProductReq'
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
+    get:
+      summary: ''
+      operationId: admin-get-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAdmin'
+      description: 'Admin: Get product'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      parameters: []
+      tags:
+        - admin
   /client/shops:
     get:
       summary: ''
@@ -331,6 +376,64 @@ paths:
                 $ref: '#/components/schemas/ClientShopsRes'
       operationId: get-shops
       description: 'Client: Get shops'
+  /admin/discounts:
+    get:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountsRes'
+      operationId: admin-get-discounts
+      description: 'Admin: Get discounts'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: page
+        - schema:
+            type: string
+          in: query
+          name: limit
+        - schema:
+            type: string
+          in: query
+          name: search
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          name: sort
+    post:
+      summary: ''
+      operationId: admin-create-discount
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+      description: 'Admin: create discount'
+      tags:
+        - admin
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreDiscountReq'
 components:
   schemas:
     VerifyCodeReq:
@@ -648,6 +751,10 @@ components:
           type: string
         description:
           type: string
+        currency:
+          type: string
+          x-stoplight:
+            id: k3vbnddx828ed
         price:
           type: integer
         salePrice:
@@ -675,6 +782,7 @@ components:
         - id
         - name
         - description
+        - currency
         - price
         - salePrice
         - stockType
@@ -701,6 +809,127 @@ components:
         - limit
         - page
         - total
+    Discount:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        published:
+          type: boolean
+        productApplication:
+          type: string
+          enum:
+            - ALL
+            - SELECTED
+        limit:
+          type: integer
+        amount:
+          type: integer
+        amountType:
+          type: string
+          enum:
+            - PERCENTAGE
+            - FIXED_AMOUNT
+        expiresAt:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - code
+        - published
+        - productApplication
+        - limit
+        - amount
+        - amountType
+        - expiresAt
+        - createdAt
+    DiscountsRes:
+      type: object
+      x-examples:
+        Example 1:
+          items:
+            - id: Gzxp2ucxCEMtwTzBdGHHeR3FF
+              name: Easter promotion 2
+              code: KWAHU2024
+              published: true
+              productApplication: ALL
+              limit: 0
+              amount: 100
+              amountType: FIXED_AMOUNT
+              expiresAt: ''
+              createdAt: '2024-03-28 20:38:35.961 +0000 UTC'
+            - id: mhFBvxNBr0wHa0YuelqWauWPM
+              name: Easter promotion
+              code: EASTER2024
+              published: true
+              productApplication: ALL
+              limit: 0
+              amount: 100
+              amountType: FIXED_AMOUNT
+              expiresAt: ''
+              createdAt: '2024-03-28 20:37:19.903 +0000 UTC'
+          limit: 10
+          page: 1
+          total: 2
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        limit:
+          type: integer
+        page:
+          type: integer
+        total:
+          type: integer
+      required:
+        - items
+        - limit
+        - page
+        - total
+    StoreDiscountReq:
+      type: object
+      x-examples: {}
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        productApplication:
+          type: string
+          enum:
+            - ALL
+            - SELECTED
+        amount:
+          type: integer
+        amountType:
+          type: string
+          enum:
+            - PERCENTAGE
+            - FIXED_AMOUNT
+        products:
+          type: array
+          items:
+            type: string
+        endDate:
+          type: string
+          x-stoplight:
+            id: x93o98dpsra76
+          format: date
+      required:
+        - name
+        - code
+        - productApplication
+        - amount
+        - amountType
+        - products
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
