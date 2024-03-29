@@ -15,7 +15,7 @@ servers:
   - url: 'https://api.adwaso.store'
     description: ''
 paths:
-  /auth/verify-phone-number:
+  /auth/validate-phone-number:
     post:
       summary: ''
       tags:
@@ -27,8 +27,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: auth-verify-phone-number
-      description: 'Auth: Verify phone number'
+      operationId: auth-validate-phone-number
+      description: 'Auth: Validate phone number'
       requestBody:
         required: true
         content:
@@ -36,6 +36,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SendCodeReq'
         description: ''
+    parameters: []
   /auth/resend-code:
     post:
       summary: ''
