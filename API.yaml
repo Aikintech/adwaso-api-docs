@@ -510,8 +510,8 @@ paths:
       summary: ''
       operationId: admin-publish-discount
       responses:
-        '201':
-          description: Created
+        '200':
+          description: OK
           content:
             application/json:
               schema:
@@ -523,7 +523,21 @@ paths:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       requestBody:
-        content: {}
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  x-stoplight:
+                    id: dai6woico0swi
+                  enum:
+                    - PUBLISH
+                    - DRAFT
+              required:
+                - status
     parameters:
       - schema:
           type: string
