@@ -363,20 +363,29 @@ paths:
       parameters: []
       tags:
         - admin
-  /client/shops:
+  /admin/products/search:
     get:
       summary: ''
       tags:
-        - client
+        - admin
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientShopsRes'
-      operationId: get-shops
-      description: 'Client: Get shops'
+                $ref: '#/components/schemas/ProductSearchRes'
+      operationId: admin-search-products
+      description: 'Admin: Search products'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: search
+          required: true
   /admin/discounts:
     get:
       summary: ''
@@ -435,6 +444,81 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/StoreDiscountReq'
+  '/admin/discounts/{discountId}':
+    get:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountWithSelectedProducts'
+      operationId: admin-get-discount
+      description: 'Admin: Get discount'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      parameters: []
+    patch:
+      summary: ''
+      operationId: admin-update-discount
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discount'
+      description: 'Admin: Update discount'
+      tags:
+        - admin
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreDiscountReq'
+    parameters:
+      - schema:
+          type: string
+        name: discountId
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: admin-delete-discount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      description: 'Admin: Delete discount'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      tags:
+        - admin
+  /client/shops:
+    get:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientShopsRes'
+      operationId: get-shops
+      description: 'Client: Get shops'
 components:
   schemas:
     VerifyCodeReq:
@@ -931,6 +1015,75 @@ components:
         - amount
         - amountType
         - products
+    ProductSearchRes:
+      type: array
+      x-examples:
+        Example 1:
+          - id: vzCPbsZxwIa3UWcvXdyb2ApUu
+            name: Nike shoe
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+        required:
+          - id
+          - name
+    DiscountWithSelectedProducts:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        published:
+          type: boolean
+        productApplication:
+          type: string
+          enum:
+            - ALL
+            - SELECTED
+        limit:
+          type: integer
+        amount:
+          type: integer
+        amountType:
+          type: string
+          enum:
+            - PERCENTAGE
+            - FIXED_AMOUNT
+        expiresAt:
+          type: string
+        createdAt:
+          type: string
+        selectedProductsAppliedTo:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+            required:
+              - id
+              - name
+      required:
+        - id
+        - name
+        - code
+        - published
+        - productApplication
+        - limit
+        - amount
+        - amountType
+        - expiresAt
+        - createdAt
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
