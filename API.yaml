@@ -505,6 +505,31 @@ paths:
         - X-TENANT-KEY: []
       tags:
         - admin
+  '/admin/discounts/{discountId}/publish':
+    patch:
+      summary: ''
+      operationId: admin-publish-discount
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      description: 'Admin: Update discount'
+      tags:
+        - admin
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        content: {}
+    parameters:
+      - schema:
+          type: string
+        name: discountId
+        in: path
+        required: true
   /client/shops:
     get:
       summary: ''
@@ -920,8 +945,10 @@ components:
           enum:
             - PERCENTAGE
             - FIXED_AMOUNT
-        expiresAt:
+        endDate:
           type: string
+          x-stoplight:
+            id: vk85wedg7zxe1
         createdAt:
           type: string
       required:
@@ -933,7 +960,7 @@ components:
         - limit
         - amount
         - amountType
-        - expiresAt
+        - endDate
         - createdAt
     DiscountsRes:
       type: object
@@ -1057,8 +1084,10 @@ components:
           enum:
             - PERCENTAGE
             - FIXED_AMOUNT
-        expiresAt:
+        endDate:
           type: string
+          x-stoplight:
+            id: eu5l4g5tlyelf
         createdAt:
           type: string
         selectedProductsAppliedTo:
@@ -1082,7 +1111,7 @@ components:
         - limit
         - amount
         - amountType
-        - expiresAt
+        - endDate
         - createdAt
   securitySchemes:
     X-USER-TOKEN:
