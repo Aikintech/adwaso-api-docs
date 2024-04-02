@@ -544,6 +544,24 @@ paths:
         name: discountId
         in: path
         required: true
+  /admin/shop:
+    get:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+      operationId: admin-current-shop
+      description: 'Admin: Get current shop'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+    parameters: []
   /client/shops:
     get:
       summary: ''
@@ -558,6 +576,7 @@ paths:
                 $ref: '#/components/schemas/ClientShopsRes'
       operationId: get-shops
       description: 'Client: Get shops'
+    parameters: []
 components:
   schemas:
     VerifyCodeReq:
@@ -1126,6 +1145,71 @@ components:
         - amount
         - amountType
         - endDate
+        - createdAt
+    Shop:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        domain:
+          type: string
+        searchToken:
+          type: string
+        about:
+          type: string
+        onboardingStep:
+          type: string
+        status:
+          type: string
+        logo:
+          type: string
+        meta:
+          type: object
+          required:
+            - logo
+            - socials
+          properties:
+            logo:
+              type: object
+              required:
+                - url
+                - key
+              properties:
+                url:
+                  type: string
+                key:
+                  type: string
+            socials:
+              type: object
+              required:
+                - facebook
+                - twitter
+                - instagram
+                - tikTok
+              properties:
+                facebook:
+                  type: string
+                twitter:
+                  type: string
+                instagram:
+                  type: string
+                tikTok:
+                  type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - domain
+        - searchToken
+        - about
+        - onboardingStep
+        - status
+        - logo
+        - meta
         - createdAt
   securitySchemes:
     X-USER-TOKEN:
