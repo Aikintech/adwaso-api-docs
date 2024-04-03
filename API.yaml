@@ -255,6 +255,28 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadReq'
+  '/admin/files/{fileKey}':
+    delete:
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: admin-delete-file
+      description: 'Admin: Delete file'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+    parameters:
+      - schema:
+          type: string
+        name: fileKey
+        in: path
+        required: true
   /admin/products:
     post:
       tags:
@@ -440,6 +462,7 @@ paths:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -479,6 +502,7 @@ paths:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -561,6 +585,54 @@ paths:
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
+    parameters: []
+  /admin/shop/general-details:
+    patch:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+      operationId: admin-update-shop-general-details
+      description: 'Admin: Update shop general details'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopGeneralDetailsReq'
+    parameters: []
+  /admin/shop/brand-theming:
+    patch:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+      operationId: admin-update-shop-brand-and-theme
+      description: 'Admin: Update shop brand and theme'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateShopBrandAndThemeReq'
     parameters: []
   /client/shops:
     get:
@@ -1211,6 +1283,60 @@ components:
         - logo
         - meta
         - createdAt
+    ShopGeneralDetailsReq:
+      title: ShopGeneralDetailsReq
+      x-stoplight:
+        id: dpg2mnfazb36y
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: u4cuji9epwfs1
+        about:
+          type: string
+          x-stoplight:
+            id: 849e93f60bpz3
+        instagram:
+          type: string
+          x-stoplight:
+            id: 9fxsy2rrfxa2l
+        facebook:
+          type: string
+          x-stoplight:
+            id: cw09fenjec73f
+        twitter:
+          type: string
+          x-stoplight:
+            id: ceocm82ybcimo
+        tikTok:
+          type: string
+          x-stoplight:
+            id: bk54df8ji5gtj
+      required:
+        - name
+        - about
+        - instagram
+        - facebook
+        - twitter
+        - tikTok
+    UpdateShopBrandAndThemeReq:
+      title: UpdateShopBrandAndThemeReq
+      x-stoplight:
+        id: x5jjt2dyczg6o
+      type: object
+      properties:
+        logoURL:
+          type: string
+          x-stoplight:
+            id: gu66s6sx45dhw
+        logoKey:
+          type: string
+          x-stoplight:
+            id: 4z052t4z73bui
+      required:
+        - logoURL
+        - logoKey
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
