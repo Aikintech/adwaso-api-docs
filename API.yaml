@@ -950,12 +950,17 @@ components:
             type: string
             x-stoplight:
               id: 4z2tezmsp8gi3
+          banner:
+            type: string
+            x-stoplight:
+              id: 4z2tezmsp8gi3
         required:
           - domain
           - key
           - name
           - status
           - logo
+          - banner
     ProductAdmin:
       type: object
       x-examples: {}
@@ -1236,12 +1241,11 @@ components:
           type: string
         status:
           type: string
-        logo:
-          type: string
         meta:
           type: object
           required:
             - logo
+            - banner
             - socials
           properties:
             logo:
@@ -1249,6 +1253,18 @@ components:
               required:
                 - url
                 - key
+              properties:
+                url:
+                  type: string
+                key:
+                  type: string
+            banner:
+              type: object
+              required:
+                - url
+                - key
+              x-stoplight:
+                id: 1dwr8jvbwj1qy
               properties:
                 url:
                   type: string
@@ -1280,7 +1296,6 @@ components:
         - about
         - onboardingStep
         - status
-        - logo
         - meta
         - createdAt
     ShopGeneralDetailsReq:
