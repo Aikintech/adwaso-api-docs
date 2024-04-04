@@ -772,6 +772,8 @@ components:
     LoginRes:
       type: object
       x-examples: {}
+      x-stoplight:
+        id: focpq326f8nds
       properties:
         tokens:
           type: object
@@ -791,7 +793,7 @@ components:
             - lastName
           properties:
             avatar:
-              type: string
+              $ref: '#/components/schemas/FileUploadRes'
             firstName:
               type: string
             lastName:
@@ -799,8 +801,6 @@ components:
       required:
         - tokens
         - user
-      x-stoplight:
-        id: focpq326f8nds
     Category:
       type: object
       x-examples: {}
@@ -1341,7 +1341,15 @@ components:
         id: x5jjt2dyczg6o
       type: object
       properties:
-        logoURL:
+        bannerUrl:
+          type: string
+          x-stoplight:
+            id: gu66s6sx45dhw
+        bannerKey:
+          type: string
+          x-stoplight:
+            id: gu66s6sx45dhw
+        logoUrl:
           type: string
           x-stoplight:
             id: gu66s6sx45dhw
@@ -1350,7 +1358,9 @@ components:
           x-stoplight:
             id: 4z052t4z73bui
       required:
-        - logoURL
+        - bannerUrl
+        - bannerKey
+        - logoUrl
         - logoKey
   securitySchemes:
     X-USER-TOKEN:
