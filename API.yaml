@@ -634,6 +634,30 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateShopBrandAndThemeReq'
     parameters: []
+  /admin/user/update-avatar:
+    patch:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: admin-update-user-avatar
+      description: 'Admin: Update user avatar'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAvatarReq'
+    parameters: []
   /client/shops:
     get:
       summary: ''
@@ -1362,6 +1386,31 @@ components:
         - bannerKey
         - logoUrl
         - logoKey
+    UpdateAvatarReq:
+      title: UpdateAvatarReq
+      x-stoplight:
+        id: 9lncwnhe55evu
+      type: object
+      properties:
+        key:
+          type: string
+          x-stoplight:
+            id: vnlqh8ofjcftp
+        url:
+          type: string
+          x-stoplight:
+            id: mqe0ppla5p7ww
+      required:
+        - key
+        - url
+    ChangePasswordReq:
+      title: ChangePasswordReq
+      x-stoplight:
+        id: wx4x1c2dluiaw
+      type: object
+      properties:
+        id:
+          type: string
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
