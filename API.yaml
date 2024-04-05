@@ -15,6 +15,21 @@ servers:
   - url: 'https://api.adwaso.store'
     description: ''
 paths:
+  /shops:
+    get:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientShopsRes'
+      operationId: get-shops
+      description: 'Client: Get shops'
+    parameters: []
   /auth/validate-phone-number:
     post:
       summary: ''
@@ -634,6 +649,24 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateShopBrandAndThemeReq'
     parameters: []
+  /admin/user:
+    get:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+      operationId: admin-current-user
+      description: 'Admin: Get current user'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+    parameters: []
   /admin/user/update-avatar:
     patch:
       summary: ''
@@ -681,21 +714,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ChangePasswordReq'
-    parameters: []
-  /client/shops:
-    get:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientShopsRes'
-      operationId: get-shops
-      description: 'Client: Get shops'
     parameters: []
 components:
   schemas:
@@ -1449,6 +1467,40 @@ components:
         - currentPassword
         - newPassword
         - confirmNewPassword
+    CurrentUser:
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        avatar:
+          type: object
+          required:
+            - key
+            - url
+          properties:
+            key:
+              type: string
+            url:
+              type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - firstName
+        - lastName
+        - phoneNumber
+        - avatar
+        - status
+        - createdAt
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
