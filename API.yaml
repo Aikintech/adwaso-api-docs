@@ -658,6 +658,30 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateAvatarReq'
     parameters: []
+  /admin/user/change-password:
+    patch:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: admin-change-password
+      description: 'Admin: Change password'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordReq'
+    parameters: []
   /client/shops:
     get:
       summary: ''
@@ -1409,8 +1433,22 @@ components:
         id: wx4x1c2dluiaw
       type: object
       properties:
-        id:
+        currentPassword:
           type: string
+          x-stoplight:
+            id: c50kwngztd8ni
+        newPassword:
+          type: string
+          x-stoplight:
+            id: ee7is1t0crkha
+        confirmNewPassword:
+          type: string
+          x-stoplight:
+            id: z8z4920d1jkqn
+      required:
+        - currentPassword
+        - newPassword
+        - confirmNewPassword
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
