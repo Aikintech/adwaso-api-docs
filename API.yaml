@@ -678,7 +678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageRes'
+                $ref: '#/components/schemas/CurrentUser'
       operationId: admin-update-user-avatar
       description: 'Admin: Update user avatar'
       security:
@@ -690,6 +690,30 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAvatarReq'
+    parameters: []
+  /admin/user/personal-details:
+    patch:
+      summary: ''
+      tags:
+        - admin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+      operationId: admin-update-personal-details
+      description: 'Admin: Update personal details'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePersonalDetailsReq'
     parameters: []
   /admin/user/change-password:
     patch:
@@ -1501,6 +1525,31 @@ components:
         - avatar
         - status
         - createdAt
+    UpdatePersonalDetailsReq:
+      title: UpdatePersonalDetailsReq
+      x-stoplight:
+        id: 0934opalylqpv
+      type: object
+      properties:
+        firstName:
+          type: string
+          x-stoplight:
+            id: emtowyrnmol43
+        lastName:
+          type: string
+          x-stoplight:
+            id: 1hqvp7rp7nds1
+        email:
+          type: string
+          x-stoplight:
+            id: w7nhdtepigu04
+        phoneNumber:
+          type: string
+          x-stoplight:
+            id: 5ef9vc1rudp99
+      required:
+        - firstName
+        - lastName
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
