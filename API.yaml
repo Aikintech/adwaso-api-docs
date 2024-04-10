@@ -1024,6 +1024,10 @@ components:
             type: string
             x-stoplight:
               id: b4glaeyef2kir
+          searchToken:
+            type: string
+            x-stoplight:
+              id: b4glaeyef2kir
           key:
             type: string
             x-stoplight:
@@ -1046,6 +1050,7 @@ components:
               id: 4z2tezmsp8gi3
         required:
           - domain
+          - searchToken
           - key
           - name
           - status
