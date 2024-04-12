@@ -15,21 +15,6 @@ servers:
   - url: 'https://api.adwaso.store'
     description: ''
 paths:
-  /shops:
-    get:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ClientShopsRes'
-      operationId: get-shops
-      description: 'Client: Get shops'
-    parameters: []
   /auth/validate-phone-number:
     post:
       summary: ''
@@ -148,11 +133,11 @@ paths:
       security:
         - X-TENANT-KEY: []
     parameters: []
-  /admin/categories:
+  /tenant/categories:
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -160,14 +145,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CategoriesRes'
-      operationId: admin-get-categories
-      description: 'Admin: Get categories'
+      operationId: tenant-get-categories
+      description: 'Tenant: Get categories'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
     post:
       summary: ''
-      operationId: admin-create-category
+      operationId: tenant-create-category
       responses:
         '201':
           description: Created
@@ -175,23 +160,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Category'
-      description: 'Admin: Create category'
+      description: 'Tenant: Create category'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       tags:
-        - admin
+        - tenant
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/StoreCategoryReq'
-  '/admin/categories/{categoryId}':
+  '/tenant/categories/{categoryId}':
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -199,14 +184,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Category'
-      operationId: admin-get-category
-      description: 'Admin: Get category'
+      operationId: tenant-get-category
+      description: 'Tenant: Get category'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
     patch:
       summary: ''
-      operationId: admin-update-category
+      operationId: tenant-update-category
       responses:
         '201':
           description: Created
@@ -214,12 +199,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Category'
-      description: 'Admin: Update category'
+      description: 'Tenant: Update category'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       tags:
-        - admin
+        - tenant
       requestBody:
         required: true
         content:
@@ -234,7 +219,7 @@ paths:
         required: true
     delete:
       summary: ''
-      operationId: admin-delete-category
+      operationId: tenant-delete-category
       responses:
         '200':
           description: OK
@@ -242,16 +227,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      description: 'Admin: Delete category'
+      description: 'Tenant: Delete category'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       tags:
-        - admin
-  /admin/files:
+        - tenant
+  /tenant/files:
     post:
       tags:
-        - admin
+        - tenant
       responses:
         '201':
           description: Created
@@ -259,8 +244,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FileUploadRes'
-      operationId: admin-upload-file
-      description: 'Admin: Upload file'
+      operationId: tenant-upload-file
+      description: 'Tenant: Upload file'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -270,10 +255,10 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadReq'
-  '/admin/files/{fileKey}':
+  '/tenant/files/{fileKey}':
     delete:
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -281,8 +266,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: admin-delete-file
-      description: 'Admin: Delete file'
+      operationId: tenant-delete-file
+      description: 'Tenant: Delete file'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -292,10 +277,10 @@ paths:
         name: fileKey
         in: path
         required: true
-  /admin/products:
+  /tenant/products:
     post:
       tags:
-        - admin
+        - tenant
       responses:
         '201':
           description: Created
@@ -303,8 +288,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: admin-create-product
-      description: 'Admin: Create product'
+      operationId: tenant-create-product
+      description: 'Tenant: Create product'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -317,7 +302,7 @@ paths:
     parameters: []
     get:
       summary: ''
-      operationId: admin-get-products
+      operationId: tenant-get-products
       responses:
         '200':
           description: OK
@@ -325,7 +310,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductsRes'
-      description: 'Admin: Get products'
+      description: 'Tenant: Get products'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -354,11 +339,11 @@ paths:
           in: query
           name: filterByCategory
       tags:
-        - admin
-  '/admin/products/{productId}':
+        - tenant
+  '/tenant/products/{productId}':
     patch:
       tags:
-        - admin
+        - tenant
       responses:
         '201':
           description: Created
@@ -366,8 +351,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: admin-update-product
-      description: 'Admin: Update product'
+      operationId: tenant-update-product
+      description: 'Tenant: Update product'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -385,26 +370,26 @@ paths:
         required: true
     get:
       summary: ''
-      operationId: admin-get-product
+      operationId: tenant-get-product
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductAdmin'
-      description: 'Admin: Get product'
+                $ref: '#/components/schemas/ProductTenant'
+      description: 'Tenant: Get product'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       parameters: []
       tags:
-        - admin
-  /admin/products/search:
+        - tenant
+  /tenant/products/search:
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -412,8 +397,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductSearchRes'
-      operationId: admin-search-products
-      description: 'Admin: Search products'
+      operationId: tenant-search-products
+      description: 'Tenant: Search products'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -423,11 +408,11 @@ paths:
           in: query
           name: search
           required: true
-  /admin/discounts:
+  /tenant/discounts:
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -435,8 +420,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DiscountsRes'
-      operationId: admin-get-discounts
-      description: 'Admin: Get discounts'
+      operationId: tenant-get-discounts
+      description: 'Tenant: Get discounts'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -462,7 +447,7 @@ paths:
           name: sort
     post:
       summary: ''
-      operationId: admin-create-discount
+      operationId: tenant-create-discount
       responses:
         '201':
           description: Created
@@ -470,9 +455,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Discount'
-      description: 'Admin: create discount'
+      description: 'Tenant: create discount'
       tags:
-        - admin
+        - tenant
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -482,11 +467,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/StoreDiscountReq'
-  '/admin/discounts/{discountId}':
+  '/tenant/discounts/{discountId}':
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -494,15 +479,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DiscountWithSelectedProducts'
-      operationId: admin-get-discount
-      description: 'Admin: Get discount'
+      operationId: tenant-get-discount
+      description: 'Tenant: Get discount'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       parameters: []
     patch:
       summary: ''
-      operationId: admin-update-discount
+      operationId: tenant-update-discount
       responses:
         '201':
           description: Created
@@ -510,9 +495,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Discount'
-      description: 'Admin: Update discount'
+      description: 'Tenant: Update discount'
       tags:
-        - admin
+        - tenant
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -530,7 +515,7 @@ paths:
         required: true
     delete:
       summary: ''
-      operationId: admin-delete-discount
+      operationId: tenant-delete-discount
       responses:
         '200':
           description: OK
@@ -538,16 +523,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      description: 'Admin: Delete discount'
+      description: 'Tenant: Delete discount'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       tags:
-        - admin
-  '/admin/discounts/{discountId}/publish':
+        - tenant
+  '/tenant/discounts/{discountId}/publish':
     patch:
       summary: ''
-      operationId: admin-publish-discount
+      operationId: tenant-publish-discount
       responses:
         '200':
           description: OK
@@ -555,9 +540,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      description: 'Admin: Update discount'
+      description: 'Tenant: Update discount'
       tags:
-        - admin
+        - tenant
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -583,11 +568,11 @@ paths:
         name: discountId
         in: path
         required: true
-  /admin/shop:
+  /tenant/shop:
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -595,17 +580,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Shop'
-      operationId: admin-current-shop
-      description: 'Admin: Get current shop'
+      operationId: tenant-current-shop
+      description: 'Tenant: Get current shop'
       security:
-        - X-USER-TOKEN: []
         - X-TENANT-KEY: []
     parameters: []
-  /admin/shop/general-details:
+  /tenant/shop/general-details:
     patch:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -613,8 +597,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Shop'
-      operationId: admin-update-shop-general-details
-      description: 'Admin: Update shop general details'
+      operationId: tenant-update-shop-general-details
+      description: 'Tenant: Update shop general details'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -625,11 +609,11 @@ paths:
             schema:
               $ref: '#/components/schemas/ShopGeneralDetailsReq'
     parameters: []
-  /admin/shop/brand-theming:
+  /tenant/shop/brand-theming:
     patch:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -637,8 +621,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Shop'
-      operationId: admin-update-shop-brand-and-theme
-      description: 'Admin: Update shop brand and theme'
+      operationId: tenant-update-shop-brand-and-theme
+      description: 'Tenant: Update shop brand and theme'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -649,11 +633,11 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateShopBrandAndThemeReq'
     parameters: []
-  /admin/user:
+  /tenant/user:
     get:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -661,17 +645,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CurrentUser'
-      operationId: admin-current-user
-      description: 'Admin: Get current user'
+      operationId: tenant-current-user
+      description: 'Tenant: Get current user'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
     parameters: []
-  /admin/user/update-avatar:
+  /tenant/user/update-avatar:
     patch:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -679,8 +663,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CurrentUser'
-      operationId: admin-update-user-avatar
-      description: 'Admin: Update user avatar'
+      operationId: tenant-update-user-avatar
+      description: 'Tenant: Update user avatar'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -691,11 +675,11 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateAvatarReq'
     parameters: []
-  /admin/user/personal-details:
+  /tenant/user/personal-details:
     patch:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -703,8 +687,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CurrentUser'
-      operationId: admin-update-personal-details
-      description: 'Admin: Update personal details'
+      operationId: tenant-update-personal-details
+      description: 'Tenant: Update personal details'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -715,11 +699,11 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdatePersonalDetailsReq'
     parameters: []
-  /admin/user/change-password:
+  /tenant/user/change-password:
     patch:
       summary: ''
       tags:
-        - admin
+        - tenant
       responses:
         '200':
           description: OK
@@ -727,8 +711,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: admin-change-password
-      description: 'Admin: Change password'
+      operationId: tenant-change-password
+      description: 'Tenant: Change password'
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
@@ -1010,54 +994,10 @@ components:
         - salePrice
         - media
         - categories
-    ClientShopsRes:
-      title: ClientShopsRes
-      x-stoplight:
-        id: 98q4m3j7pxi34
-      type: array
-      items:
-        x-stoplight:
-          id: 9l78rvh2vr93u
-        type: object
-        properties:
-          domain:
-            type: string
-            x-stoplight:
-              id: b4glaeyef2kir
-          searchToken:
-            type: string
-            x-stoplight:
-              id: b4glaeyef2kir
-          key:
-            type: string
-            x-stoplight:
-              id: ooybpvkuddwv0
-          name:
-            type: string
-            x-stoplight:
-              id: lor30mdmflcfi
-          status:
-            type: string
-            x-stoplight:
-              id: id62vk1n4y02r
-          logo:
-            type: string
-            x-stoplight:
-              id: 4z2tezmsp8gi3
-          banner:
-            type: string
-            x-stoplight:
-              id: 4z2tezmsp8gi3
-        required:
-          - domain
-          - searchToken
-          - key
-          - name
-          - status
-          - logo
-          - banner
-    ProductAdmin:
+    ProductTenant:
       type: object
+      x-stoplight:
+        id: 1ef820eb153b8
       x-examples: {}
       properties:
         id:
@@ -1112,7 +1052,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/ProductAdmin'
+            $ref: '#/components/schemas/ProductTenant'
         limit:
           type: integer
         page:
@@ -1567,4 +1507,4 @@ components:
 tags:
   - name: backoffice
   - name: client
-  - name: admin
+  - name: tenant

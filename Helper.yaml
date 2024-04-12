@@ -1,0 +1,138 @@
+openapi: 3.0.0
+x-stoplight:
+  id: zp8oyxs0zsq34
+info:
+  title: Adwaso Helper App
+  version: '1.0'
+  contact:
+    name: Nana Kwesi Ofosu-Aikins
+  description: Adwaso Helper App
+servers:
+  - url: 'http://adwaso-helper-app.test'
+    description: Local
+paths:
+  /files:
+    get:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadRes'
+      operationId: get-file-details
+      description: Get file details
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: fileKey
+          required: true
+      tags:
+        - files
+    post:
+      summary: ''
+      operationId: upload-file
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadRes'
+      description: Upload file
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadReq'
+        description: ''
+      tags:
+        - files
+    delete:
+      summary: ''
+      operationId: delete-file
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: fileKey
+          required: true
+      description: Delete files
+      tags:
+        - files
+components:
+  schemas:
+    FileUploadReq:
+      title: FileUploadReq
+      x-stoplight:
+        id: yvp4nj7luq7rg
+      type: object
+      properties:
+        file:
+          type: string
+          x-stoplight:
+            id: fs39rf03fsygc
+          format: binary
+        uploadType:
+          type: string
+          x-stoplight:
+            id: 8jzzwr3okdk01
+          enum:
+            - product
+            - avatar
+            - logo
+            - banner
+      required:
+        - file
+        - uploadType
+    FileUploadRes:
+      type: object
+      x-examples: {}
+      properties:
+        key:
+          type: string
+        url:
+          type: string
+      required:
+        - key
+        - url
+      x-stoplight:
+        id: ka6ne781yalb6
+    MessageRes:
+      type: object
+      x-stoplight:
+        id: 9xujj5wwv9wft
+      x-examples: {}
+      properties:
+        message:
+          type: string
+      required:
+        - message
+  securitySchemes:
+    X-USER-TOKEN:
+      name: X-USER-TOKEN
+      type: apiKey
+      in: header
+    X-TENANT-KEY:
+      name: X-TENANT-KEY
+      type: apiKey
+      in: header
+x-internal: true
+tags:
+  - name: files
