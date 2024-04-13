@@ -93,12 +93,17 @@ paths:
               schema:
                 type: object
                 properties:
-                  domain:
+                  consumerUrl:
                     type: string
                     x-stoplight:
                       id: ghxts43psodye
+                  adminUrl:
+                    type: string
+                    x-stoplight:
+                      id: uj021pfy5nsb7
                 required:
-                  - domain
+                  - consumerUrl
+                  - adminUrl
       operationId: auth-register
       description: 'Auth: Register'
       requestBody:
@@ -383,6 +388,22 @@ paths:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
       parameters: []
+      tags:
+        - tenant
+    delete:
+      summary: ''
+      operationId: tenant-delete-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      description: 'Tenant: Delete product'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
       tags:
         - tenant
   /tenant/products/search:
