@@ -260,10 +260,9 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/FileUploadReq'
-  '/tenant/files/{fileKey}':
     delete:
-      tags:
-        - tenant
+      summary: ''
+      operationId: tenant-delete-file
       responses:
         '200':
           description: OK
@@ -271,17 +270,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: tenant-delete-file
-      description: 'Tenant: Delete file'
+      description: Tenant delete file
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
-    parameters:
-      - schema:
-          type: string
-        name: fileKey
-        in: path
-        required: true
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: fileKey
+          required: true
+      tags:
+        - tenant
   /tenant/products:
     post:
       tags:
