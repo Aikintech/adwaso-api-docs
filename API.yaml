@@ -1300,31 +1300,43 @@ components:
         meta:
           type: object
           required:
+            - theme
             - logo
             - banner
             - socials
           properties:
+            theme:
+              type: object
+              required:
+                - layout
+                - primaryColor
+                - textColor
+              properties:
+                layout:
+                  type: string
+                primaryColor:
+                  type: string
+                textColor:
+                  type: string
             logo:
               type: object
               required:
-                - url
                 - key
+                - url
               properties:
-                url:
-                  type: string
                 key:
+                  type: string
+                url:
                   type: string
             banner:
               type: object
               required:
-                - url
                 - key
-              x-stoplight:
-                id: 1dwr8jvbwj1qy
+                - url
               properties:
-                url:
-                  type: string
                 key:
+                  type: string
+                url:
                   type: string
             socials:
               type: object
@@ -1344,6 +1356,8 @@ components:
                   type: string
         createdAt:
           type: string
+        createdAtUnix:
+          type: integer
       required:
         - id
         - name
@@ -1354,6 +1368,7 @@ components:
         - status
         - meta
         - createdAt
+        - createdAtUnix
     ShopGeneralDetailsReq:
       title: ShopGeneralDetailsReq
       x-stoplight:
