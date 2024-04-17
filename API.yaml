@@ -292,7 +292,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageRes'
+                $ref: '#/components/schemas/ProductTenant'
       operationId: tenant-create-product
       description: 'Tenant: Create product'
       security:
@@ -355,7 +355,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageRes'
+                $ref: '#/components/schemas/ProductTenant'
       operationId: tenant-update-product
       description: 'Tenant: Update product'
       security:
@@ -406,6 +406,43 @@ paths:
         - X-TENANT-KEY: []
       tags:
         - tenant
+  '/tenant/products/{productId}/update-media':
+    patch:
+      tags:
+        - tenant
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductTenant'
+      operationId: tenant-update-product-media
+      description: 'Tenant: Update product media'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                media:
+                  type: array
+                  x-stoplight:
+                    id: clzlwj3gxyebv
+                  items:
+                    $ref: '#/components/schemas/FileUploadReq'
+              required:
+                - media
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
   /tenant/products/search:
     get:
       summary: ''
