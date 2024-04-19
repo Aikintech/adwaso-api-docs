@@ -1341,6 +1341,7 @@ components:
             - logo
             - banner
             - socials
+            - workingHours
           properties:
             theme:
               type: object
@@ -1391,6 +1392,12 @@ components:
                   type: string
                 tikTok:
                   type: string
+            workingHours:
+              type: array
+              x-stoplight:
+                id: gz0ebaljpqec7
+              items:
+                $ref: '#/components/schemas/WorkingHour'
         createdAt:
           type: string
         createdAtUnix:
@@ -1568,6 +1575,23 @@ components:
       required:
         - firstName
         - lastName
+    WorkingHour:
+      type: object
+      x-examples: {}
+      properties:
+        label:
+          type: string
+        enable:
+          type: boolean
+        fromTime:
+          type: string
+        toTime:
+          type: string
+      required:
+        - label
+        - enable
+        - fromTime
+        - toTime
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
