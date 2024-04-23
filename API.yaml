@@ -14,6 +14,10 @@ servers:
     description: ''
   - url: 'https://api.adwaso.store'
     description: ''
+tags:
+  - name: backoffice
+  - name: client
+  - name: tenant
 paths:
   /auth/validate-phone-number:
     post:
@@ -691,6 +695,30 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateShopBrandAndThemeReq'
     parameters: []
+  /tenant/shop/working-days:
+    patch:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+      operationId: tenant-update-shop-working-days
+      description: 'Tenant: Update shop working days'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkingHoursReq'
+    parameters: []
   /tenant/user:
     get:
       summary: ''
@@ -781,6 +809,52 @@ paths:
             schema:
               $ref: '#/components/schemas/ChangePasswordReq'
     parameters: []
+  /tenant/visitors:
+    post:
+      summary: ''
+      operationId: misc-create-visitor
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      description: 'Misc: create visitor'
+      security:
+        - X-TENANT-KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: string
+                  x-stoplight:
+                    id: 0kel3p9isca9z
+              required:
+                - uid
+      tags:
+        - tenant
+    parameters: []
+  /tenant/analytics/visitors-overview:
+    get:
+      summary: ''
+      tags:
+        - tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: tenant-get-visitors-overview
+      description: 'Tenant: Get visitors overview'
+      security:
+        - X-USER-TOKEN: []
+        - X-TENANT-KEY: []
 components:
   schemas:
     VerifyCodeReq:
@@ -1592,6 +1666,20 @@ components:
         - enable
         - fromTime
         - toTime
+    UpdateWorkingHoursReq:
+      title: UpdateWorkingHoursReq
+      x-stoplight:
+        id: fh166ulg4siii
+      type: object
+      properties:
+        workingDays:
+          x-stoplight:
+            id: sau8hzrzvw6dp
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkingHour'
+      required:
+        - workingDays
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
@@ -1601,7 +1689,3 @@ components:
       name: tenant key
       type: apiKey
       in: header
-tags:
-  - name: backoffice
-  - name: client
-  - name: tenant
