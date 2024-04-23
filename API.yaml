@@ -1551,8 +1551,8 @@ components:
           x-stoplight:
             id: 9b4tfjjyifj90
           enum:
-            - default
-            - fashion
+            - Default
+            - Fashion
       required:
         - bannerUrl
         - bannerKey
