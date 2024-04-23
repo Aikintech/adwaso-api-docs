@@ -1546,11 +1546,19 @@ components:
           type: string
           x-stoplight:
             id: 4z052t4z73bui
+        theme:
+          type: string
+          x-stoplight:
+            id: 9b4tfjjyifj90
+          enum:
+            - default
+            - fashion
       required:
         - bannerUrl
         - bannerKey
         - logoUrl
         - logoKey
+        - theme
     UpdateAvatarReq:
       title: UpdateAvatarReq
       x-stoplight:
