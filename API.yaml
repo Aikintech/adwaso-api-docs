@@ -40,6 +40,29 @@ paths:
             schema:
               $ref: '#/components/schemas/SendCodeReq'
         description: ''
+      deprecated: true
+    parameters: []
+  /auth/validate-email:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: auth-validate-email
+      description: 'Auth: Validate email'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateEmailReq'
+        description: ''
     parameters: []
   /auth/resend-code:
     post:
@@ -82,6 +105,29 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/VerifyCodeReq'
+        description: ''
+      deprecated: true
+    parameters: []
+  /auth/verify-email:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyCodeRes'
+      operationId: auth-verify-email
+      description: 'Auth: Verify email'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailReq'
         description: ''
     parameters: []
   /auth/register:
@@ -281,9 +327,18 @@ paths:
       parameters:
         - schema:
             type: string
-          in: header
+          in: query
           name: fileKey
           required: true
+        - schema:
+            type: string
+          in: query
+          name: disk
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: fileId
       tags:
         - tenant
   /tenant/products:
@@ -857,6 +912,31 @@ paths:
         - X-TENANT-KEY: []
 components:
   schemas:
+    VerifyEmailReq:
+      type: object
+      x-stoplight:
+        id: 6oj2h3otvbv96
+      x-examples: {}
+      properties:
+        email:
+          type: string
+          x-stoplight:
+            id: clupj5qzt3vh1
+          format: email
+        action:
+          type: string
+          enum:
+            - LOGIN_VERIFICATION
+            - REGISTER_VERIFICATION
+            - EMAIL_VERIFICATION
+            - PURCHASE_VERIFICATION
+            - RESET_PASSWORD
+        code:
+          type: string
+      required:
+        - email
+        - action
+        - code
     VerifyCodeReq:
       type: object
       x-stoplight:
@@ -905,6 +985,27 @@ components:
         - countryCode
         - action
         - code
+    ValidateEmailReq:
+      type: object
+      x-stoplight:
+        id: te5lgcls0n72o
+      x-examples: {}
+      properties:
+        email:
+          type: string
+          x-stoplight:
+            id: l16lwri1240wa
+        action:
+          type: string
+          enum:
+            - LOGIN_VERIFICATION
+            - REGISTER_VERIFICATION
+            - EMAIL_VERIFICATION
+            - PURCHASE_VERIFICATION
+            - RESET_PASSWORD
+      required:
+        - email
+        - action
     MessageRes:
       type: object
       x-stoplight:
@@ -928,6 +1029,8 @@ components:
     RegisterReq:
       type: object
       x-examples: {}
+      x-stoplight:
+        id: 3ubxtto2ppr22
       properties:
         firstName:
           type: string
@@ -935,10 +1038,11 @@ components:
           type: string
         password:
           type: string
-        phoneNumber:
+        email:
           type: string
-        countryCode:
-          type: string
+          x-stoplight:
+            id: 2ojsol6p4lc83
+          format: email
         shopName:
           type: string
         shopSubdomain:
@@ -949,13 +1053,10 @@ components:
         - firstName
         - lastName
         - password
-        - phoneNumber
-        - countryCode
+        - email
         - shopName
         - shopSubdomain
         - verificationCode
-      x-stoplight:
-        id: 3ubxtto2ppr22
     LoginReq:
       type: object
       x-stoplight:
@@ -1072,16 +1173,26 @@ components:
     FileUploadRes:
       type: object
       x-examples: {}
+      x-stoplight:
+        id: ka6ne781yalb6
       properties:
         key:
           type: string
         url:
           type: string
+        fileId:
+          type: string
+          x-stoplight:
+            id: vvtbknw3z6brc
+        disk:
+          type: string
+          x-stoplight:
+            id: 8e22czlqsfuk5
       required:
         - key
         - url
-      x-stoplight:
-        id: ka6ne781yalb6
+        - fileId
+        - disk
     StoreProductReq:
       type: object
       x-stoplight:
@@ -1538,11 +1649,27 @@ components:
           type: string
           x-stoplight:
             id: gu66s6sx45dhw
+        bannerFileId:
+          type: string
+          x-stoplight:
+            id: gu66s6sx45dhw
+        bannerDisk:
+          type: string
+          x-stoplight:
+            id: gu66s6sx45dhw
         logoUrl:
           type: string
           x-stoplight:
             id: gu66s6sx45dhw
         logoKey:
+          type: string
+          x-stoplight:
+            id: 4z052t4z73bui
+        logoFileId:
+          type: string
+          x-stoplight:
+            id: 4z052t4z73bui
+        logoDisk:
           type: string
           x-stoplight:
             id: 4z052t4z73bui
@@ -1556,8 +1683,12 @@ components:
       required:
         - bannerUrl
         - bannerKey
+        - bannerFileId
+        - bannerDisk
         - logoUrl
         - logoKey
+        - logoFileId
+        - logoDisk
         - theme
     UpdateAvatarReq:
       title: UpdateAvatarReq
@@ -1573,9 +1704,14 @@ components:
           type: string
           x-stoplight:
             id: mqe0ppla5p7ww
+        fileId:
+          type: string
+          x-stoplight:
+            id: 4qe0cj6j33i4g
       required:
         - key
         - url
+        - fileId
     ChangePasswordReq:
       title: ChangePasswordReq
       x-stoplight:
