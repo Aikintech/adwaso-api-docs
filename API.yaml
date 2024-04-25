@@ -83,7 +83,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SendCodeReq'
+              $ref: '#/components/schemas/ValidateEmailReq'
         description: ''
   /auth/verify-code:
     post:
@@ -1065,16 +1065,16 @@ components:
       properties:
         password:
           type: string
-        phoneNumber:
+        email:
           type: string
-        countryCode:
-          type: string
+          x-stoplight:
+            id: jn83c2kmjth3i
+          format: email
         verificationCode:
           type: string
       required:
         - password
-        - phoneNumber
-        - countryCode
+        - email
         - verificationCode
     LoginRes:
       type: object
@@ -1746,16 +1746,13 @@ components:
           type: string
         phoneNumber:
           type: string
+        email:
+          type: string
+          x-stoplight:
+            id: 17tfvwfkhg2r6
+          format: email
         avatar:
-          type: object
-          required:
-            - key
-            - url
-          properties:
-            key:
-              type: string
-            url:
-              type: string
+          $ref: '#/components/schemas/FileUploadRes'
         status:
           type: string
         createdAt:
@@ -1765,6 +1762,7 @@ components:
         - firstName
         - lastName
         - phoneNumber
+        - email
         - avatar
         - status
         - createdAt
