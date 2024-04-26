@@ -1507,8 +1507,6 @@ components:
           type: object
           required:
             - theme
-            - logo
-            - banner
             - socials
             - workingHours
           properties:
@@ -1524,26 +1522,6 @@ components:
                 primaryColor:
                   type: string
                 textColor:
-                  type: string
-            logo:
-              type: object
-              required:
-                - key
-                - url
-              properties:
-                key:
-                  type: string
-                url:
-                  type: string
-            banner:
-              type: object
-              required:
-                - key
-                - url
-              properties:
-                key:
-                  type: string
-                url:
                   type: string
             socials:
               type: object
@@ -1571,6 +1549,10 @@ components:
           type: string
         createdAtUnix:
           type: integer
+        logo:
+          $ref: '#/components/schemas/FileUploadRes'
+        banner:
+          $ref: '#/components/schemas/FileUploadRes'
       required:
         - id
         - name
@@ -1582,6 +1564,8 @@ components:
         - meta
         - createdAt
         - createdAtUnix
+        - logo
+        - banner
     ShopGeneralDetailsReq:
       title: ShopGeneralDetailsReq
       x-stoplight:
@@ -1625,38 +1609,6 @@ components:
         id: x5jjt2dyczg6o
       type: object
       properties:
-        bannerUrl:
-          type: string
-          x-stoplight:
-            id: gu66s6sx45dhw
-        bannerKey:
-          type: string
-          x-stoplight:
-            id: gu66s6sx45dhw
-        bannerFileId:
-          type: string
-          x-stoplight:
-            id: gu66s6sx45dhw
-        bannerDisk:
-          type: string
-          x-stoplight:
-            id: gu66s6sx45dhw
-        logoUrl:
-          type: string
-          x-stoplight:
-            id: gu66s6sx45dhw
-        logoKey:
-          type: string
-          x-stoplight:
-            id: 4z052t4z73bui
-        logoFileId:
-          type: string
-          x-stoplight:
-            id: 4z052t4z73bui
-        logoDisk:
-          type: string
-          x-stoplight:
-            id: 4z052t4z73bui
         theme:
           type: string
           x-stoplight:
@@ -1664,16 +1616,18 @@ components:
           enum:
             - Default
             - Fashion
+        logo:
+          x-stoplight:
+            id: gyzzbyfzrbq2h
+          type: string
+        banner:
+          x-stoplight:
+            id: gyzzbyfzrbq2h
+          type: string
       required:
-        - bannerUrl
-        - bannerKey
-        - bannerFileId
-        - bannerDisk
-        - logoUrl
-        - logoKey
-        - logoFileId
-        - logoDisk
         - theme
+        - logo
+        - banner
     UpdateAvatarReq:
       title: UpdateAvatarReq
       x-stoplight:
