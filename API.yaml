@@ -1634,27 +1634,12 @@ components:
         id: 9lncwnhe55evu
       type: object
       properties:
-        key:
-          type: string
-          x-stoplight:
-            id: vnlqh8ofjcftp
-        url:
-          type: string
-          x-stoplight:
-            id: mqe0ppla5p7ww
         fileId:
           type: string
           x-stoplight:
-            id: 4qe0cj6j33i4g
-        disk:
-          type: string
-          x-stoplight:
-            id: nkbig7kvfqs6j
+            id: vnlqh8ofjcftp
       required:
-        - key
-        - url
         - fileId
-        - disk
     ChangePasswordReq:
       title: ChangePasswordReq
       x-stoplight:
