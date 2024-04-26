@@ -328,17 +328,8 @@ paths:
         - schema:
             type: string
           in: query
-          name: fileKey
-          required: true
-        - schema:
-            type: string
-          in: query
-          name: disk
-          required: true
-        - schema:
-            type: string
-          in: query
           name: fileId
+          required: true
       tags:
         - tenant
   /tenant/products:
@@ -995,6 +986,7 @@ components:
           type: string
           x-stoplight:
             id: l16lwri1240wa
+          format: email
         action:
           type: string
           enum:
@@ -1176,23 +1168,15 @@ components:
       x-stoplight:
         id: ka6ne781yalb6
       properties:
-        key:
-          type: string
         url:
           type: string
-        fileId:
+        id:
           type: string
           x-stoplight:
             id: vvtbknw3z6brc
-        disk:
-          type: string
-          x-stoplight:
-            id: 8e22czlqsfuk5
       required:
-        - key
         - url
-        - fileId
-        - disk
+        - id
     StoreProductReq:
       type: object
       x-stoplight:
@@ -1708,10 +1692,15 @@ components:
           type: string
           x-stoplight:
             id: 4qe0cj6j33i4g
+        disk:
+          type: string
+          x-stoplight:
+            id: nkbig7kvfqs6j
       required:
         - key
         - url
         - fileId
+        - disk
     ChangePasswordReq:
       title: ChangePasswordReq
       x-stoplight:
