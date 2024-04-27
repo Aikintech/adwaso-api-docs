@@ -1207,7 +1207,7 @@ components:
         media:
           type: array
           items:
-            $ref: '#/components/schemas/FileUploadRes'
+            type: string
         categories:
           type: array
           items:
@@ -1614,8 +1614,10 @@ components:
           x-stoplight:
             id: 9b4tfjjyifj90
           enum:
-            - Default
+            - Minimal
+            - Adwaso
             - Fashion
+            - Tech
         logo:
           x-stoplight:
             id: gyzzbyfzrbq2h
