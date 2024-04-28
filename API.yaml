@@ -901,6 +901,28 @@ paths:
       security:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
+  '/client/products/{productId}':
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
+    get:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductTenant'
+      operationId: client-get-product
+      description: 'Client: get product'
+      security:
+        - X-TENANT-KEY: []
 components:
   schemas:
     VerifyEmailReq:
@@ -1503,6 +1525,11 @@ components:
           type: string
         status:
           type: string
+        maintenanceMode:
+          type: boolean
+          x-stoplight:
+            id: 2dt12awdmjsq9
+          default: false
         meta:
           type: object
           required:
@@ -1561,6 +1588,7 @@ components:
         - about
         - onboardingStep
         - status
+        - maintenanceMode
         - meta
         - createdAt
         - createdAtUnix
