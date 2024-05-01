@@ -934,16 +934,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ComputeDiscountRes'
+                $ref: '#/components/schemas/CalculateDiscountRes'
       operationId: client-calculate-discount
       description: 'Client: calculate discount'
       security:
         - X-TENANT-KEY: []
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ComputeDiscountReq'
+              $ref: '#/components/schemas/CalculateDiscountReq'
     parameters: []
 components:
   schemas:
@@ -1807,8 +1808,8 @@ components:
             $ref: '#/components/schemas/WorkingHour'
       required:
         - workingDays
-    ComputeDiscountReq:
-      title: ComputeDiscountReq
+    CalculateDiscountReq:
+      title: CalculateDiscountReq
       x-stoplight:
         id: ryr9xgvsirkcp
       type: object
@@ -1841,8 +1842,8 @@ components:
       required:
         - code
         - products
-    ComputeDiscountRes:
-      title: ComputeDiscountRes
+    CalculateDiscountRes:
+      title: CalculateDiscountRes
       x-stoplight:
         id: yns6a010qkx2d
       type: object
