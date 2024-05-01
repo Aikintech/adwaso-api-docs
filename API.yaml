@@ -923,6 +923,28 @@ paths:
       description: 'Client: get product'
       security:
         - X-TENANT-KEY: []
+  /client/orders/calculate-discount:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeDiscountRes'
+      operationId: client-calculate-discount
+      description: 'Client: calculate discount'
+      security:
+        - X-TENANT-KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputeDiscountReq'
+    parameters: []
 components:
   schemas:
     VerifyEmailReq:
@@ -1536,6 +1558,7 @@ components:
             - theme
             - socials
             - workingHours
+            - currency
           properties:
             theme:
               type: object
@@ -1572,6 +1595,10 @@ components:
                 id: gz0ebaljpqec7
               items:
                 $ref: '#/components/schemas/WorkingHour'
+            currency:
+              type: string
+              x-stoplight:
+                id: nsohz8cefgz53
         createdAt:
           type: string
         createdAtUnix:
@@ -1780,6 +1807,52 @@ components:
             $ref: '#/components/schemas/WorkingHour'
       required:
         - workingDays
+    ComputeDiscountReq:
+      title: ComputeDiscountReq
+      x-stoplight:
+        id: ryr9xgvsirkcp
+      type: object
+      properties:
+        code:
+          type: string
+          x-stoplight:
+            id: xnw7igpioebe5
+        products:
+          type: array
+          x-stoplight:
+            id: h077hlysha6fq
+          items:
+            x-stoplight:
+              id: ym0l11yf2zlh8
+            type: object
+            properties:
+              id:
+                type: string
+                x-stoplight:
+                  id: jd9v9hr3lpuwa
+              quantity:
+                type: integer
+                x-stoplight:
+                  id: oirbvsi2pi17w
+                minimum: 1
+            required:
+              - id
+              - quantity
+      required:
+        - code
+        - products
+    ComputeDiscountRes:
+      title: ComputeDiscountRes
+      x-stoplight:
+        id: yns6a010qkx2d
+      type: object
+      properties:
+        discount:
+          type: integer
+          x-stoplight:
+            id: n5ishnkerh129
+      required:
+        - discount
   securitySchemes:
     X-USER-TOKEN:
       type: apiKey
