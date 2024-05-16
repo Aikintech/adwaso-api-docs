@@ -288,7 +288,7 @@ paths:
         - X-TENANT-KEY: []
       tags:
         - tenant
-  /tenant/files:
+  /tenant/files/images:
     post:
       tags:
         - tenant
@@ -299,7 +299,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FileUploadRes'
-      operationId: tenant-upload-file
+      operationId: tenant-upload-image
       description: 'Tenant: Upload file'
       security:
         - X-USER-TOKEN: []
@@ -312,7 +312,7 @@ paths:
               $ref: '#/components/schemas/FileUploadReq'
     delete:
       summary: ''
-      operationId: tenant-delete-file
+      operationId: tenant-delete-image
       responses:
         '200':
           description: OK
@@ -332,6 +332,7 @@ paths:
           required: true
       tags:
         - tenant
+    parameters: []
   /tenant/products:
     post:
       tags:
@@ -1210,18 +1211,30 @@ components:
     FileUploadRes:
       type: object
       x-examples: {}
-      x-stoplight:
-        id: ka6ne781yalb6
       properties:
-        url:
-          type: string
         id:
           type: string
+        url:
+          type: string
+          format: uri
+        thumbnailUrl:
+          type: string
+          format: uri
+        order:
+          type: integer
+        size:
+          type: integer
+        tag:
+          type: string
           x-stoplight:
-            id: vvtbknw3z6brc
+            id: wlcu3cneo02k4
       required:
-        - url
         - id
+        - url
+        - thumbnailUrl
+        - order
+        - size
+        - tag
     StoreProductReq:
       type: object
       x-stoplight:
