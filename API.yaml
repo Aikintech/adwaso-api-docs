@@ -328,7 +328,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: fileId
+          name: url
           required: true
       tags:
         - tenant
