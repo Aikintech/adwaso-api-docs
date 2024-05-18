@@ -1094,6 +1094,16 @@ components:
             id: 8uw1hvjy0kjsy
         verificationCode:
           type: string
+        action:
+          type: string
+          enum:
+            - LOGIN_VERIFICATION
+            - REGISTER_VERIFICATION
+            - EMAIL_VERIFICATION
+            - PURCHASE_VERIFICATION
+            - RESET_PASSWORD
+          x-stoplight:
+            id: 01xhl8eapoayb
       required:
         - firstName
         - lastName
@@ -1102,6 +1112,7 @@ components:
         - shopName
         - shopDomain
         - verificationCode
+        - action
     LoginReq:
       type: object
       x-stoplight:
