@@ -31,8 +31,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageRes'
-      operationId: auth-validate-email
-      description: 'Auth: Validate email'
+      operationId: auth-validate-signup
+      description: 'Auth: Validate signup'
       requestBody:
         required: true
         content:
@@ -53,14 +53,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VerifyCodeRes'
-      operationId: auth-verify-email
-      description: 'Auth: Verify email'
+      operationId: auth-verify-signup
+      description: 'Auth: Verify signup'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/VerifyEmailReq'
+        description: ''
+    parameters: []
+  /auth/signup:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  consumerUrl:
+                    type: string
+                    x-stoplight:
+                      id: ghxts43psodye
+                  adminUrl:
+                    type: string
+                    x-stoplight:
+                      id: uj021pfy5nsb7
+                required:
+                  - consumerUrl
+                  - adminUrl
+      operationId: auth-signup
+      description: 'Auth: Signup'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterReq'
         description: ''
     parameters: []
   /auth/validate-phone-number:
@@ -129,40 +163,6 @@ paths:
               $ref: '#/components/schemas/VerifyCodeReq'
         description: ''
       deprecated: true
-    parameters: []
-  /auth/register:
-    post:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  consumerUrl:
-                    type: string
-                    x-stoplight:
-                      id: ghxts43psodye
-                  adminUrl:
-                    type: string
-                    x-stoplight:
-                      id: uj021pfy5nsb7
-                required:
-                  - consumerUrl
-                  - adminUrl
-      operationId: auth-register
-      description: 'Auth: Register'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RegisterReq'
-        description: ''
     parameters: []
   /auth/login:
     post:
@@ -1088,8 +1088,10 @@ components:
           format: email
         shopName:
           type: string
-        shopSubdomain:
+        shopDomain:
           type: string
+          x-stoplight:
+            id: 8uw1hvjy0kjsy
         verificationCode:
           type: string
       required:
@@ -1098,7 +1100,7 @@ components:
         - password
         - email
         - shopName
-        - shopSubdomain
+        - shopDomain
         - verificationCode
     LoginReq:
       type: object
