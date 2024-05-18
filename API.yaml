@@ -1041,9 +1041,14 @@ components:
             - EMAIL_VERIFICATION
             - PURCHASE_VERIFICATION
             - RESET_PASSWORD
+        firstName:
+          type: string
+          x-stoplight:
+            id: jjoorlw80v7dy
       required:
         - email
         - action
+        - firstName
     MessageRes:
       type: object
       x-stoplight:
