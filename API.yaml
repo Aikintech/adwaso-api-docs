@@ -97,6 +97,30 @@ paths:
               $ref: '#/components/schemas/RegisterReq'
         description: ''
     parameters: []
+  /auth/login:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginRes'
+      operationId: auth-login
+      description: 'Auth: Login'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginReq'
+        description: ''
+      security:
+        - X-TENANT-KEY: []
+    parameters: []
   /auth/validate-phone-number:
     post:
       summary: ''
@@ -163,30 +187,6 @@ paths:
               $ref: '#/components/schemas/VerifyCodeReq'
         description: ''
       deprecated: true
-    parameters: []
-  /auth/login:
-    post:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LoginRes'
-      operationId: auth-login
-      description: 'Auth: Login'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginReq'
-        description: ''
-      security:
-        - X-TENANT-KEY: []
     parameters: []
   /tenant/categories:
     get:
@@ -1126,12 +1126,9 @@ components:
           x-stoplight:
             id: jn83c2kmjth3i
           format: email
-        verificationCode:
-          type: string
       required:
         - password
         - email
-        - verificationCode
     LoginRes:
       type: object
       x-examples: {}
@@ -1151,7 +1148,6 @@ components:
         user:
           type: object
           required:
-            - avatar
             - firstName
             - lastName
           properties:
