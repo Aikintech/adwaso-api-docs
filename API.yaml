@@ -9,7 +9,7 @@ info:
     email: nanaaikinson24@gmail.com
   description: API description
 servers:
-  - url: 'http://localhost:9001'
+  - url: 'http://localhost:8000'
   - url: 'https://staging-api.adwaso.store'
     description: ''
   - url: 'https://api.adwaso.store'
