@@ -19,6 +19,50 @@ tags:
   - name: client
   - name: tenant
 paths:
+  /auth/signup/validate:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRes'
+      operationId: auth-validate-email
+      description: 'Auth: Validate email'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateEmailReq'
+        description: ''
+    parameters: []
+  /auth/signup/verify:
+    post:
+      summary: ''
+      tags:
+        - client
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyCodeRes'
+      operationId: auth-verify-email
+      description: 'Auth: Verify email'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailReq'
+        description: ''
+    parameters: []
   /auth/validate-phone-number:
     post:
       summary: ''
@@ -41,28 +85,6 @@ paths:
               $ref: '#/components/schemas/SendCodeReq'
         description: ''
       deprecated: true
-    parameters: []
-  /auth/validate-email:
-    post:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MessageRes'
-      operationId: auth-validate-email
-      description: 'Auth: Validate email'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ValidateEmailReq'
-        description: ''
     parameters: []
   /auth/resend-code:
     post:
@@ -107,28 +129,6 @@ paths:
               $ref: '#/components/schemas/VerifyCodeReq'
         description: ''
       deprecated: true
-    parameters: []
-  /auth/verify-email:
-    post:
-      summary: ''
-      tags:
-        - client
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerifyCodeRes'
-      operationId: auth-verify-email
-      description: 'Auth: Verify email'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VerifyEmailReq'
-        description: ''
     parameters: []
   /auth/register:
     post:
