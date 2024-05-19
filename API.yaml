@@ -766,7 +766,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateWorkingHoursReq'
     parameters: []
-  /tenant/user:
+  /tenant/users/me:
     get:
       summary: ''
       tags:
@@ -808,7 +808,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateAvatarReq'
     parameters: []
-  /tenant/user/personal-details:
+  /tenant/users/personal-details:
     patch:
       summary: ''
       tags:
@@ -832,7 +832,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdatePersonalDetailsReq'
     parameters: []
-  /tenant/user/change-password:
+  /tenant/users/change-password:
     patch:
       summary: ''
       tags:
@@ -1782,7 +1782,6 @@ components:
         - lastName
         - phoneNumber
         - email
-        - avatar
         - status
         - createdAt
     UpdatePersonalDetailsReq:
