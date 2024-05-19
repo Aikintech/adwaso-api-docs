@@ -784,7 +784,7 @@ paths:
         - X-USER-TOKEN: []
         - X-TENANT-KEY: []
     parameters: []
-  /tenant/user/update-avatar:
+  /tenant/users/change-avatar:
     patch:
       summary: ''
       tags:
