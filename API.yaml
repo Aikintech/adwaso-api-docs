@@ -1359,10 +1359,6 @@ components:
           type: string
         description:
           type: string
-        currency:
-          type: string
-          x-stoplight:
-            id: k3vbnddx828ed
         price:
           type: integer
         salePrice:
@@ -1390,7 +1386,6 @@ components:
         - id
         - name
         - description
-        - currency
         - price
         - salePrice
         - stockType
